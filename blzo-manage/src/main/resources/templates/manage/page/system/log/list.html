@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="manage/common/menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div th:replace="manage/common/box_header"></div>
+
+                    <div class="content-box-large box-with-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <legend>筛选条件<a class="empty"><i class="glyphicon glyphicon-repeat"></i></a></legend>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>用户昵称</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="nickName" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>authjUri</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="authjUri" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>authjName</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="authjName" name="search">
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索
+                                </button>
+                            </div>
+                            <!--<div class="panel-heading col-md-12">
+                                <legend>内容<a href="/manage/mine/admin/add"><i class="glyphicon glyphicon-plus"></i></a>
+                                </legend>
+                            </div>-->
+                            <div class="col-md-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>管理员id</th>
+                                        <th>管理员昵称</th>
+                                        <th>authjUri</th>
+                                        <th>authjName</th>
+                                        <th>参数</th>
+                                        <th>ip</th>
+                                        <th>时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                        <td th:text="${obj.id}"></td>
+                                        <td th:text="${obj.adminId}"></td>
+                                        <td th:text="${obj.adminName}"></td>
+                                        <td th:text="${obj.authjUri}"></td>
+                                        <td th:text="${obj.authjName}"></td>
+                                        <td th:text="${obj.paramers}"></td>
+                                        <td th:text="${obj.ip}"></td>
+                                        <td th:text="${#dates.format(obj.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" th:include="manage/common/paginate :: paginate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer th:replace="manage/common/footer"></footer>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+
+<!--<script type="text/javascript" src="/manage/js/page/mine/admin/list.js"></script>-->
+<script>
+    window.onload = function () {
+        //
+        // var adminList = new window.controller.AdminList();
+        //
+        // adminList.init();
+
+        var search = new window.controller.Search();
+
+        search.init();
+    };
+</script>
+</body>
+</html>

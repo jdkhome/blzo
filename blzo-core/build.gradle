@@ -1,0 +1,7 @@
+jar {
+    baseName = "blzo-core"
+}
+dependencies {
+    // 公共依赖
+    compile project(":blzo-common")
+}

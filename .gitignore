@@ -1,0 +1,48 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### webpack
+out/
+
+### MacOS
+.DS_Store
+
+### log
+*.log
+
+### gradle
+gradle/
+gradlew
+gradlew.bat
+
+
+### 各个项目的生成文件
+blzo-common/out/
+blzo-common/build/
+blzo-core/out/
+blzo-core/build/
+blzo-manage/out/
+blzo-manage/build/

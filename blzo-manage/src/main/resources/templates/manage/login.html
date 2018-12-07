@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body class="login-bg">
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-wrapper">
+                <div class="box">
+                    <div class="content-wrap">
+                        <h6>欢迎使用</h6>
+                        <!--<div class="social">
+                            <a class="face_login" href="#">
+                                <span class="face_icon">
+                                    <img src="images/facebook.png" alt="fb">
+                                </span>
+                                <span class="text">Sign in with Facebook</span>
+                            </a>
+                            <div class="division">
+                                <hr class="left">
+                                <span>or</span>
+                                <hr class="right">
+                            </div>
+                        </div>-->
+                        <input class="form-control" name="username" type="text" placeholder="账户">
+                        <input class="form-control" name="password" type="password" placeholder="密码">
+                        <div class="action">
+                            <a class="btn btn-primary signup" id="login" href="#">登录</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="already">
+                    <p>Don't have an account yet?</p>
+                    <a href="signup.html">Sign Up</a>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+<script type="text/javascript" src="/manage/js/page/login.js"></script>
+<script>
+    window.onload = function () {
+
+        var controller = new window.controller.Login();
+
+        controller.init();
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+jar {
+    baseName = "blzo-manage"
+}
+dependencies {
+    // 公共依赖
+    compile project(":blzo-common")
+
+    // thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+}

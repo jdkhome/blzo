@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://应用数据库地址:应用数据库端口/应用数据库名称?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: 应用数据库账户
+    password: 应用数据库密码
+
+  redis:
+    host: host
+    port: 6379
+    password: pwd
+    database: 0
+
+logging:
+  level:
+    root: info

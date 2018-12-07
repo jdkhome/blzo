@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="manage/common/menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div th:replace="manage/common/box_header"></div>
+
+                    <div class="content-box-large box-with-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <legend>筛选条件<a class="empty"><i class="glyphicon glyphicon-repeat"></i></a></legend>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>登录名</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="userName" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>昵称</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="nickName" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>手机号</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="phone" name="search">
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索
+                                </button>
+                            </div>
+                            <div class="panel-heading col-md-12">
+                                <legend>内容<a class="btn btn-primary btn-sm" href="/manage/system/admin/add"> 添加管理员</a>
+                                </legend>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>昵称</th>
+                                        <th>登录名</th>
+                                        <th>手机号</th>
+                                        <th>状态</th>
+                                        <th>备注</th>
+                                        <th>上次登录</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                        <td th:text="${obj.id}"></td>
+                                        <td>
+                                            <span class="admin-nickName-span" th:text="${obj.nickName}"></span>
+                                            <input type="text" class="admin-nickName-input hidden"
+                                                   th:value="${obj.nickName}">
+                                        </td>
+                                        <td>
+                                            <span class="admin-username-span" th:text="${obj.username}"></span>
+                                            <input type="text" class="admin-username-input hidden"
+                                                   th:value="${obj.username}">
+                                        </td>
+                                        <td>
+                                            <span class="admin-phone-span" th:text="${obj.phone}"></span>
+                                            <input type="text" class="admin-phone-input hidden"
+                                                   th:value="${obj.phone}">
+                                        </td>
+                                        <td>
+                                            <span class="admin-status-span" th:text="${obj.statusStr}"></span>
+                                            <select class="admin-status-select hidden">
+                                                <option th:each="adminStatus:${adminStatusEnums}"
+                                                        th:value="${adminStatus.code}"
+                                                        th:selected="${obj.status == adminStatus.code}"
+                                                        th:text="${adminStatus.name}">
+                                                    初始状态
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <span class="admin-remark-span" th:text="${obj.remark}"></span>
+                                            <input type="text" class="admin-remark-input hidden"
+                                                   th:value="${obj.remark}">
+                                        </td>
+                                        <td th:text="${'['+#dates.format(obj.lastTime, 'yyyy-MM-dd HH:mm:ss')+']'+obj.ipCity+'('+obj.lastIp+')'}"></td>
+                                        <td>
+                                            <button class="btn btn-info btn-xs admin-edit">
+                                                编辑
+                                            </button>
+                                            <button class="btn btn-info btn-xs admin-save hidden"
+                                                    th:attr="data-id=${obj.id}">
+                                                保存
+                                            </button>
+                                            <a class="btn btn-primary btn-xs"
+                                               th:href="@{${'/manage/system/admin/edit'}(adminId=${obj.id})}">
+                                                修改密码
+                                            </a>
+                                            <a class="btn btn-danger btn-xs delete" th:attr="data-id=${obj.id}">
+                                                删除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" th:include="manage/common/paginate :: paginate"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="manage/common/footer"></footer>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+
+<script type="text/javascript" src="/manage/js/page/system/admin/list.js"></script>
+<script>
+    window.onload = function () {
+
+        var adminList = new window.controller.AdminList();
+
+        adminList.init();
+
+        var search = new window.controller.Search();
+
+        search.init();
+    };
+</script>
+</body>
+</html>

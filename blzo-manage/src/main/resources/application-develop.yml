@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    # 应用服务数据源配置
+    core:
+      url: jdbc:mysql://应用服务数据库地址:应用服务数据库端口/应用服务数据库名?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: 应用服务数据库账户
+      password: 应用服务数据库密码
+    # 管理后台数据源配置(仅供测试，定时重置，请勿搞事)
+    manage:
+      url: jdbc:mysql://data-public.jdkhome.com:3306/blzo?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: blzo
+      password: testpwd
+
+  redis:
+    host: host
+    port: 6379
+    password: pwd
+    database: 0
+
+  #测试时不需要缓存，方便调试
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    root: info

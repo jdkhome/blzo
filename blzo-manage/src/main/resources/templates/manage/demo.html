@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="manage/common/menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <div th:replace="manage/common/box_header"></div>
+
+                    <div class="content-box-large box-with-header">
+                        <p>BLZO V1.0.0</p>
+                        <p>这是DEMO 页面</p>
+                        <button class="btn btn-info" id="demo-api-1">
+                            demo接口1
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="manage/common/footer"></footer>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+<script type="text/javascript" src="/manage/js/page/demo.js"></script>
+<script>
+    window.onload = function () {
+
+        var demo = new window.controller.Demo();
+
+        demo.init();
+
+    };
+</script>
+</body>
+</html>
