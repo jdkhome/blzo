@@ -3,8 +3,20 @@
     <h3 align="center">BLZO！超级脚手架！</h3>
     <p align="center">
         基于springboot的企业级快速开发脚手架.
+   
+        <br>
+   
+        <a href="https://github.com/jdkhome/blzo">
+            <img src="https://img.shields.io/badge/github-star-green.svg">
+        </a>
+        
+        <a href="https://gitee.com/jdkhome/blzo">
+            <img src="https://img.shields.io/badge/gitee-star-green.svg">
+        </a>
+
     </p>
 </p>
+
 
 > BLZO是一个基于springboot的企业级快速开发脚手架。包含了一个简单易用(无论是对用户还是开发者)且功能强大的管理后台！十分适合中小型项目快速迭代。  
 > 使用 [jdk11](http://openjdk.java.net/) 环境，[gradle 4.10/5.0](https://gradle.org/) 或以上版本 推荐使用[idea](https://www.jetbrains.com/idea/)进行开发  
