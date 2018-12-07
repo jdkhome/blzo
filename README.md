@@ -46,6 +46,14 @@
 - 权限的传递是基于继承关系的，当管理员失去了某个权限，那么所有由他传递出去的这个权限都会被收回，无论何时授权、传递了多少级
 - 每个用户都可以自定义自己的功能菜单
 
+<video id="video" controls="" preload="none" poster="http://om2bks7xs.bkt.clouddn.com/2017-08-26-Markdown-Advance-Video.jpg">
+      <source id="mp4" src="https://www.jdkhome.com/file/FSXD" type="video/mp4">
+</video>
+
+<video id="video" controls="" preload="none" poster="http://om2bks7xs.bkt.clouddn.com/2017-08-26-Markdown-Advance-Video.jpg">
+      <source id="mp4" src="https://www.jdkhome.com/file/FSXK" type="video/mp4">
+</video>
+
 对于开发者:
 
 一般来说，如果要实现支持用户自定义权限、自定义权限传递(组 或者 角色) 这样灵活的功能，不可避免的要有很多配置：  
@@ -96,3 +104,6 @@ public class DemoController {
 
 root用户(超级管理员) 会获得由 ```@Authj``` 注解标注的所有页面、接口的权限，并进而将这些权限授予更多管理员！
 
+## 快速开始:
+
+todo
