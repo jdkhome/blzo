@@ -46,13 +46,14 @@
 - 权限的传递是基于继承关系的，当管理员失去了某个权限，那么所有由他传递出去的这个权限都会被收回，无论何时授权、传递了多少级
 - 每个用户都可以自定义自己的功能菜单
 
-<video id="video" controls="" preload="none" poster="http://om2bks7xs.bkt.clouddn.com/2017-08-26-Markdown-Advance-Video.jpg">
-      <source id="mp4" src="https://www.jdkhome.com/file/FSXD" type="video/mp4">
-</video>
+[视频演示](https://www.jdkhome.com/uri/ZGFO)
 
-<video id="video" controls="" preload="none" poster="http://om2bks7xs.bkt.clouddn.com/2017-08-26-Markdown-Advance-Video.jpg">
-      <source id="mp4" src="https://www.jdkhome.com/file/FSXK" type="video/mp4">
-</video>
+试用(请不要修改root用户的密码，如果无法登录请联系我，数据库会定期重置，请不要搞事蟹蟹！):
+```
+http://blzo-manage.jdkhome.com
+root
+1234abc
+```
 
 对于开发者:
 
@@ -106,4 +107,4 @@ root用户(超级管理员) 会获得由 ```@Authj``` 注解标注的所有页�
 
 ## 快速开始:
 
-todo
+todo(待编写。。。)
