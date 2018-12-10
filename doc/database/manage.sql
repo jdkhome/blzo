@@ -54,7 +54,7 @@ CREATE TABLE `group_admin` (
   `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id_admin_id_UNIQUE` (`group_id`,`admin_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- ----------------------------
 -- Table structure for group_auth
 -- ----------------------------
