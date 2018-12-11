@@ -64,6 +64,12 @@
 
 [视频演示](https://www.jdkhome.com/uri/ZGFO)
 
+截图:  
+我的权限:
+![我的权限](doc/img/我的权限.png)
+我的菜单:
+![我的菜单](doc/img/我的菜单.png)
+
 试用(请不要修改root用户的密码，如果无法登录请联系我，数据库会定期重置，请不要搞事蟹蟹！):
 ```
 http://blzo-manage.jdkhome.com
