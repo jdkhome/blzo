@@ -18,7 +18,9 @@
 
 市面上的权限管理脚手架有很多，如果你正在寻找合适的项目，请一定继续阅读，本项目的权限管理，相对其他项目(要手动配置权限地址、菜单的)，具有**极大**的优势！
 
-[点这里前往 BLZO的 jdk8+springboot2.0 版本](/jdkhome/blzo-jdk8)
+> 点下面前往 BLZO的 jdk8+springboot2.0 版本 
+> - [github](https://github.com/jdkhome/blzo-jdk8) 
+> - [gitee](https://gitee.com/jdkhome/blzo-jdk8)
 
 ## 感谢：
 
