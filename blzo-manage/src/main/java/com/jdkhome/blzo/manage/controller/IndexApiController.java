@@ -1,11 +1,11 @@
 package com.jdkhome.blzo.manage.controller;
 
-import com.jdkhome.blzo.common.aop.log.controller.Api;
-import com.jdkhome.blzo.common.pojo.ApiResponse;
-import com.jdkhome.blzo.common.tools.IpTools;
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
-import com.jdkhome.blzo.manage.generator.model.Admin;
-import com.jdkhome.blzo.manage.service.manage.AdminService;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.service.AdminService;
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
+import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
+import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

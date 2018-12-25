@@ -1,9 +1,9 @@
 package com.jdkhome.blzo.manage.controller.system;
 
-import com.jdkhome.blzo.common.aop.log.controller.Api;
-import com.jdkhome.blzo.common.pojo.ApiResponse;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.service.manage.AdminBasicService;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
+import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

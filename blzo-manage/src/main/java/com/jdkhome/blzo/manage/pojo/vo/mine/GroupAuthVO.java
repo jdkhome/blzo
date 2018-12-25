@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.manage.pojo.vo.mine;
 
 
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjBean;
+import com.jdkhome.blzo.ex.authj.core.AuthjBean;
 
 /**
  * Created by jdk on 18/1/9.

@@ -5,6 +5,9 @@ dependencies {
     // 公共依赖
     compile project(":blzo-common")
 
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-authj
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-authj', version: '0.0.4'
+
     // thymeleaf
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 

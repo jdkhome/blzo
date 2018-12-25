@@ -1,9 +1,9 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
-import com.jdkhome.blzo.manage.generator.model.Admin;
-import com.jdkhome.blzo.manage.service.manage.AdminBasicService;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

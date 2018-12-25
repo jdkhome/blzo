@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
 @EnableScheduling
-@ComponentScan(basePackages = {"com.jdkhome.blzo"}) // 扫描所有
+@ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"}) // 扫描所有
 @SpringBootApplication
 public class CoreApplication implements CommandLineRunner {
 

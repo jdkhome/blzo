@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.manage.pojo.vo.system;
 
-import com.jdkhome.blzo.manage.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import lombok.Data;
 
 /**

@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.manage.pojo.vo.mine;
 
 
-import com.jdkhome.blzo.manage.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 
 /**
  * Created by jdk on 18/1/8.

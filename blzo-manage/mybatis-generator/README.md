@@ -1,1 +1,0 @@
-## 使用前，先执行 blzo-go/doc/databasc/manage.sql 建库建表

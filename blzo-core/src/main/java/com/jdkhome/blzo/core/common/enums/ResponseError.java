@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.core.common.enums;
 
 
-import com.jdkhome.blzo.common.pojo.BaseError;
+import com.jdkhome.blzo.ex.basic.pojo.BaseError;
 
 /**
  * author link.ji

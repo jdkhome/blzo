@@ -22,6 +22,8 @@
 > - [github](https://github.com/jdkhome/blzo-jdk8) 
 > - [gitee](https://gitee.com/jdkhome/blzo-jdk8)
 
+关联项目 [blzo-ex](https://github.com/jdkhome/blzo-ex) BLZO脚手架扩展
+
 ## 感谢：
 
 主要技术栈:
@@ -135,3 +137,16 @@ root用户(超级管理员) 会获得由 ```@Authj``` 注解标注的所有页�
 ## 快速开始:
 
 todo(待编写。。。)
+> 代码拉下来就可以直接跑了，推荐使用 idea进行开发
+
+## 最新功能:
+
+### BLZO v1.1.0
+增加[blzo-ex](https://github.com/jdkhome/blzo-ex)项目，将脚手架基础代码封装进jar包，进一步减轻脚手架的重量，增强了扩展性和易用性！
+
+## 参与开发
+欢迎任何贡献，从设计理念上讲，本项目只作为基础脚手架，如果你想要集成一些通用性强的业务服务(比如会员系统、积分系统这种)或是通用的底层功能(比如日志、操作记录、配置型风控等)，欢迎提交代码到[blzo-ex](https://github.com/jdkhome/blzo-ex)！
+
+
+
+

@@ -1,11 +1,11 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.jdkhome.blzo.manage.common.aop.authj.*;
-import com.jdkhome.blzo.manage.generator.model.Group;
-import com.jdkhome.blzo.manage.generator.model.GroupAdmin;
+import com.jdkhome.blzo.ex.authj.core.*;
+import com.jdkhome.blzo.ex.authj.generator.model.Group;
+import com.jdkhome.blzo.ex.authj.generator.model.GroupAdmin;
+import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
+import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
 import com.jdkhome.blzo.manage.pojo.vo.mine.layer.MenuGroupVO;
-import com.jdkhome.blzo.manage.service.manage.AdminBasicService;
-import com.jdkhome.blzo.manage.service.manage.GroupBasicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

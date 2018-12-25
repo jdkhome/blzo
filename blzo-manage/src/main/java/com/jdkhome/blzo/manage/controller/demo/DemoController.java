@@ -1,7 +1,7 @@
 package com.jdkhome.blzo.manage.controller.demo;
 
-import com.jdkhome.blzo.common.pojo.ApiResponse;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

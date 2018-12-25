@@ -2,5 +2,14 @@ jar {
     baseName = "blzo-common"
 }
 dependencies {
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-ip2region
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-ip2region', version: '0.0.4'
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-utils
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-utils', version: '0.0.4'
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: '0.0.4'
+
 
 }

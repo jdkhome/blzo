@@ -1,13 +1,13 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.jdkhome.blzo.common.aop.log.controller.Api;
-import com.jdkhome.blzo.common.enums.CommonResponseError;
-import com.jdkhome.blzo.common.exception.ServiceException;
-import com.jdkhome.blzo.common.pojo.ApiResponse;
-import com.jdkhome.blzo.manage.common.aop.authj.Authj;
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjManager;
-import com.jdkhome.blzo.manage.generator.model.Group;
-import com.jdkhome.blzo.manage.service.manage.GroupBasicService;
+import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
+import com.jdkhome.blzo.ex.authj.generator.model.Group;
+import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
+import com.jdkhome.blzo.ex.basic.aop.api.Api;
+import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.exception.ServiceException;
+import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +40,7 @@ public class GroupApiController {
     @Api("添加组")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupAdd(@RequestParam(value = "name", required = true) String name,
-                                                @RequestParam(value = "remark", required = false) String remark
+                                              @RequestParam(value = "remark", required = false) String remark
     ) {
         groupBasicService.addGroup(name, remark);
         return ApiResponse.success();
@@ -81,8 +81,8 @@ public class GroupApiController {
     @Api("编辑组")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupEdit(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                 @RequestParam(value = "name", required = false) String name,
-                                                 @RequestParam(value = "remark", required = false) String remark
+                                               @RequestParam(value = "name", required = false) String name,
+                                               @RequestParam(value = "remark", required = false) String remark
     ) {
 
         Group group = groupBasicService.getGroupById(groupId);
@@ -109,7 +109,7 @@ public class GroupApiController {
     @Api("添加组成员")
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupAdminAdd(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                     @RequestParam(value = "adminId", required = true) Integer adminId
+                                                   @RequestParam(value = "adminId", required = true) Integer adminId
     ) {
 
         Group group = groupBasicService.getGroupById(groupId);
@@ -136,7 +136,7 @@ public class GroupApiController {
     @Api("移除组成员")
     @RequestMapping(value = "/admin/remove", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupAdminRemove(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                        @RequestParam(value = "adminId", required = true) Integer adminId
+                                                      @RequestParam(value = "adminId", required = true) Integer adminId
     ) {
         Group group = groupBasicService.getGroupById(groupId);
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
@@ -162,7 +162,7 @@ public class GroupApiController {
     @Api("添加组权限")
     @RequestMapping(value = "/auth/add", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupAuthAdd(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                    @RequestParam(value = "uri", required = true) String uri
+                                                  @RequestParam(value = "uri", required = true) String uri
     ) {
 
         Group group = groupBasicService.getGroupById(groupId);
@@ -189,7 +189,7 @@ public class GroupApiController {
     @Api("移除组权限")
     @RequestMapping(value = "/auth/remove", method = RequestMethod.POST)
     public ApiResponse apiManagerMineGroupAuthRemove(@RequestParam(value = "groupId", required = true) Integer groupId,
-                                                       @RequestParam(value = "uri", required = true) String uri
+                                                     @RequestParam(value = "uri", required = true) String uri
     ) {
 
         Group group = groupBasicService.getGroupById(groupId);

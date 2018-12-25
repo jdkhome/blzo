@@ -1,6 +1,6 @@
 package com.jdkhome.blzo.manage.pojo.vo.mine.layer;
 
-import com.jdkhome.blzo.manage.common.aop.authj.AuthjBean;
+import com.jdkhome.blzo.ex.authj.core.AuthjBean;
 import lombok.Data;
 
 import java.util.List;
