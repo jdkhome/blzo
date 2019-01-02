@@ -6,9 +6,9 @@ dependencies {
     compile project(":blzo-common")
 
     // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-usignin
-    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-usignin', version: '0.0.4'
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-usignin', version: blzoExVersion
 
     // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-version
-    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-version', version: '0.0.4'
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-version', version: blzoExVersion
 
 }

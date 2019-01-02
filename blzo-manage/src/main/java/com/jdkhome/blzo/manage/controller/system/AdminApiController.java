@@ -39,9 +39,10 @@ public class AdminApiController {
                                                 @RequestParam(value = "password", required = true) String password,
                                                 @RequestParam(value = "nickName", required = true) String nickName,
                                                 @RequestParam(value = "phone", required = true) String phone,
+                                                @RequestParam(value = "email", required = true) String email,
                                                 @RequestParam(value = "remark", required = false) String remark
     ) {
-        adminBasicService.addAdmin(username, password, nickName, phone, remark);
+        adminBasicService.addAdmin(username, password, nickName, phone, email, remark);
         return ApiResponse.success();
 
     }
@@ -81,11 +82,12 @@ public class AdminApiController {
                                                  @RequestParam(value = "password", required = false) String password,
                                                  @RequestParam(value = "nickName", required = false) String nickName,
                                                  @RequestParam(value = "phone", required = false) String phone,
+                                                 @RequestParam(value = "email", required = false) String email,
                                                  @RequestParam(value = "status", required = false) Integer status,
                                                  @RequestParam(value = "remark", required = false) String remark
     ) {
 
-        adminBasicService.editAdmin(adminId, username, password, nickName, phone, status, remark, null);
+        adminBasicService.editAdmin(adminId, username, password, nickName, phone, email, status, remark, null);
 
         return ApiResponse.success();
 

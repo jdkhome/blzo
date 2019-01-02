@@ -45,7 +45,7 @@ public class SettingApiController {
             @RequestParam(value = "phone", required = false) String phone,
             @RequestParam(value = "remark", required = false) String remark
     ) {
-        adminBasicService.editAdmin(authjManager.getUserId(), null, null, nickName, phone, null, remark, null);
+        adminBasicService.editAdmin(authjManager.getUserId(), null, null, nickName, phone, null, null, remark, null);
 
         return ApiResponse.success();
     }
@@ -71,7 +71,7 @@ public class SettingApiController {
             throw new ServiceException(AuthjResponseError.RESP_ERROR_PASSWORD_ERROR);
         }
 
-        adminBasicService.editAdmin(adminId, null, newPwd, null, null, null, null, null);
+        adminBasicService.editAdmin(adminId, null, newPwd, null, null, null, null,null, null);
 
         return ApiResponse.success();
     }

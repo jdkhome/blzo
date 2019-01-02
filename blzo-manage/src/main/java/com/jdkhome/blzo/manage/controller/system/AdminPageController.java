@@ -50,7 +50,7 @@ public class AdminPageController {
         }
 
         //获取管理员列表
-        PageInfo pageInfo = adminBasicService.getAdminsWithPage(userName, nickName, phone, pageRequest.getPage(), pageRequest.getSize());
+        PageInfo pageInfo = adminBasicService.getAdminsWithPage(userName, nickName, phone, null, pageRequest.getPage(), pageRequest.getSize());
         List<Admin> admins = pageInfo.getList();
 
         List<AdminVO> vos = new ArrayList<>(admins.size());

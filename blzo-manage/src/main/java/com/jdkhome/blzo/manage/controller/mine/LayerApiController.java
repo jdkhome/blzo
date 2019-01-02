@@ -61,7 +61,7 @@ public class LayerApiController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public ApiResponse apiManagerMineLayerModify(@Valid @RequestBody List<LayerDTO> layers, Errors errors) {
 
-        adminBasicService.editAdmin(authjManager.getUserId(), null, null, null, null, null, null, layers);
+        adminBasicService.editAdmin(authjManager.getUserId(), null, null, null, null, null,null, null, layers);
 
         return ApiResponse.success();
     }

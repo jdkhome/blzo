@@ -8,7 +8,7 @@ import com.jdkhome.blzo.ex.authj.generator.model.GroupAdmin;
 import com.jdkhome.blzo.ex.authj.generator.model.GroupAuth;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
 import com.jdkhome.blzo.manage.pojo.vo.group.GroupVO;
@@ -109,7 +109,7 @@ public class GroupPageController {
 
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("组成员页 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         if (pageRequest == null) {
@@ -120,7 +120,7 @@ public class GroupPageController {
         model.addAttribute("group", group);
 
         //获取所有管理员
-        PageInfo pageInfo = adminBasicService.getAdminsWithPage(null, null, null, pageRequest.getPage(), pageRequest.getSize());
+        PageInfo pageInfo = adminBasicService.getAdminsWithPage(null, null, null, null, pageRequest.getPage(), pageRequest.getSize());
 
         //获取组内所有管理员Id
 
@@ -158,7 +158,7 @@ public class GroupPageController {
 
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("组权限页 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         if (pageRequest == null) {

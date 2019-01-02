@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.1.0.RELEASE'
+        blzoExVersion = '0.0.6'
     }
     repositories {
         mavenLocal()
@@ -13,7 +14,6 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
-
 
 
 allprojects {
@@ -100,7 +100,7 @@ allprojects {
     }
 
 
-   /* bootJar {
-        classifier = 'app'
-    }*/
+    /* bootJar {
+         classifier = 'app'
+     }*/
 }

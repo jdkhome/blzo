@@ -5,7 +5,7 @@ import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
 import com.jdkhome.blzo.ex.basic.aop.api.Api;
-import com.jdkhome.blzo.ex.basic.enums.CommonResponseError;
+import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +63,7 @@ public class GroupApiController {
 
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("删除组 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         groupBasicService.delGroup(groupId);
@@ -89,7 +89,7 @@ public class GroupApiController {
 
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("编辑组 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         groupBasicService.editGroups(groupId, name, remark);
@@ -116,7 +116,7 @@ public class GroupApiController {
 
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("添加组成员 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         groupBasicService.addGroupAdmin(groupId, adminId);
@@ -141,7 +141,7 @@ public class GroupApiController {
         Group group = groupBasicService.getGroupById(groupId);
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("移除组成员 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
 
@@ -168,7 +168,7 @@ public class GroupApiController {
         Group group = groupBasicService.getGroupById(groupId);
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("添加组权限 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         groupBasicService.addGroupAuth(groupId, uri);
@@ -195,7 +195,7 @@ public class GroupApiController {
         Group group = groupBasicService.getGroupById(groupId);
         if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
             log.error("移除组权限 -> 当前用户不是改组的创建者");
-            throw new ServiceException(CommonResponseError.NO_PERMISSION);
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
         groupBasicService.delGroupAuth(groupId, uri);
