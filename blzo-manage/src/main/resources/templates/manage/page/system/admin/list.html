@@ -3,23 +3,23 @@
 <head th:replace="manage/common/head"></head>
 
 <body>
-<!-- topbar starts -->
-<div th:replace="manage/common/topbar"></div>
-<!-- topbar ends -->
 
-<div class="page-content">
-    <div class="row">
-        <div class="col-md-2">
-            <div th:replace="manage/common/menu"></div>
-        </div>
-        <div class="col-md-10">
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
             <div class="row">
-                <div class="col-md-12">
-
-                    <div th:replace="manage/common/box_header"></div>
-
-                    <div class="content-box-large box-with-header">
-                        <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
                             <div class="col-md-12">
                                 <legend>筛选条件<a class="empty"><i class="glyphicon glyphicon-repeat"></i></a></legend>
                             </div>
@@ -39,15 +39,16 @@
                             </div>
 
                             <div class="col-md-12">
-                                <button class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索
+                                <button class="btn btn-round btn-success" id="list-search">
+                                    <i class="glyphicon glyphicon-search"></i>搜索
                                 </button>
                             </div>
-                            <div class="panel-heading col-md-12">
+                            <div class="col-md-12">
                                 <legend>内容<a class="btn btn-primary btn-sm" href="/manage/system/admin/add"> 添加管理员</a>
                                 </legend>
                             </div>
                             <div class="col-md-12">
-                                <table class="table table-striped">
+                                <table class="table table-hover general-table">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -114,22 +115,25 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="row" th:include="manage/common/paginate :: paginate"></div>
+                                <div th:replace="manage/common/paginate"></div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <!-- page end-->
+        </section>
+    </section>
 
-<footer th:replace="manage/common/footer"></footer>
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
 
-<script type="text/javascript" src="/manage/js/page/system/admin/list.js"></script>
+<script type="text/javascript" src="/manage/custom/page/system/admin/list.js"></script>
 <script>
     window.onload = function () {
 

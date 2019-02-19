@@ -3,21 +3,22 @@
 <head th:replace="manage/common/head"></head>
 
 <body>
-<!-- topbar starts -->
-<div th:replace="manage/common/topbar"></div>
-<!-- topbar ends -->
 
-<div class="page-content">
-    <div class="row">
-        <div class="col-md-2">
-            <div th:replace="manage/common/menu"></div>
-        </div>
-        <div class="col-md-10">
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
             <div class="row">
-                <div class="col-md-12">
-                    <div th:replace="manage/common/box_header"></div>
-
-                    <div class="content-box-large box-with-header">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="navbar-inner">
@@ -108,19 +109,22 @@
                             </div>
 
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <!-- page end-->
+        </section>
+    </section>
 
-<footer th:replace="manage/common/footer"></footer>
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
 
-<script type="text/javascript" src="/manage/js/page/mine/layer/modify.js"></script>
+<script type="text/javascript" src="/manage/custom/page/mine/layer/modify.js"></script>
 <script>
 
     function addMenu(_this) {

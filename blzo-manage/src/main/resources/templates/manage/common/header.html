@@ -1,0 +1,221 @@
+<header th:fragment="header" class="header fixed-top clearfix" xmlns:th="http://www.thymeleaf.org">
+    <!--logo start-->
+    <div class="brand">
+
+        <a href="/manage/index" class="logo">
+            <img width="32px" height="32px" src="/common/flowers.png" alt="">
+            <span style="color: #ffffff" th:text="${projectName}"></span>
+        </a>
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars"></div>
+        </div>
+    </div>
+    <!--logo end-->
+
+    <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+            <!-- settings start -->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="fa fa-tasks"></i>
+                    <span class="badge bg-success">8</span>
+                </a>
+                <ul class="dropdown-menu extended tasks-bar">
+                    <li>
+                        <p class="">你有8项代办任务</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="task-info clearfix">
+                                <div class="desc pull-left">
+                                    <h5>Target Sell</h5>
+                                    <p>25% , Deadline  12 June’13</p>
+                                </div>
+                                <span class="notification-pie-chart pull-right" data-percent="45">
+                            <span class="percent"></span>
+                            </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="task-info clearfix">
+                                <div class="desc pull-left">
+                                    <h5>Product Delivery</h5>
+                                    <p>45% , Deadline  12 June’13</p>
+                                </div>
+                                <span class="notification-pie-chart pull-right" data-percent="78">
+                            <span class="percent"></span>
+                            </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="task-info clearfix">
+                                <div class="desc pull-left">
+                                    <h5>Payment collection</h5>
+                                    <p>87% , Deadline  12 June’13</p>
+                                </div>
+                                <span class="notification-pie-chart pull-right" data-percent="60">
+                            <span class="percent"></span>
+                            </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="task-info clearfix">
+                                <div class="desc pull-left">
+                                    <h5>Target Sell</h5>
+                                    <p>33% , Deadline  12 June’13</p>
+                                </div>
+                                <span class="notification-pie-chart pull-right" data-percent="90">
+                            <span class="percent"></span>
+                            </span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="external">
+                        <a href="#">显示所有任务</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- settings end -->
+            <!-- inbox dropdown start-->
+            <li id="header_inbox_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-important">4</span>
+                </a>
+                <ul class="dropdown-menu extended inbox">
+                    <li>
+                        <p class="red">你有4封站内信</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="photo"><img alt="avatar" src="/manage/images/avatar-mini.jpg"></span>
+                            <span class="subject">
+                                <span class="from">Jonathan Smith</span>
+                                <span class="time">Just now</span>
+                                </span>
+                            <span class="message">
+                                    Hello, this is an example msg.
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="photo"><img alt="avatar" src="/manage/images/avatar-mini-2.jpg"></span>
+                            <span class="subject">
+                                <span class="from">Jane Doe</span>
+                                <span class="time">2 min ago</span>
+                                </span>
+                            <span class="message">
+                                    Nice admin template
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="photo"><img alt="avatar" src="/manage/images/avatar-mini-3.jpg"></span>
+                            <span class="subject">
+                                <span class="from">Tasi sam</span>
+                                <span class="time">2 days ago</span>
+                                </span>
+                            <span class="message">
+                                    This is an example msg.
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="photo"><img alt="avatar" src="/manage/images/avatar-mini.jpg"></span>
+                            <span class="subject">
+                                <span class="from">Mr. Perfect</span>
+                                <span class="time">2 hour ago</span>
+                                </span>
+                            <span class="message">
+                                    Hi there, its a test
+                                </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">See all messages</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- inbox dropdown end -->
+            <!-- notification dropdown start-->
+            <li id="header_notification_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-warning">3</span>
+                </a>
+                <ul class="dropdown-menu extended notification">
+                    <li>
+                        <p>通知</p>
+                    </li>
+                    <li>
+                        <div class="alert alert-info clearfix">
+                            <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                            <div class="noti-info">
+                                <a href="#"> Server #1 overloaded.</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="alert alert-danger clearfix">
+                            <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                            <div class="noti-info">
+                                <a href="#"> Server #2 overloaded.</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="alert alert-success clearfix">
+                            <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                            <div class="noti-info">
+                                <a href="#"> Server #3 overloaded.</a>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- notification dropdown end -->
+        </ul>
+        <!--  notification end -->
+    </div>
+    <div class="top-nav clearfix">
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+            <li>
+                <input type="text" class="form-control search" placeholder=" Search">
+            </li>
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <img alt="" src="/common/flowers.png">
+                    <span class="username" th:text="${nickName}">登录名</span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu extended logout">
+                    <li><a href="/manage/mine/setting/basic"><i class=" fa fa-user"></i>修改个人信息</a></li>
+                    <li><a href="/manage/mine/setting/password"><i class="fa fa-key"></i> 修改密码</a></li>
+                    <li><a href="/manage/login"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                </ul>
+            </li>
+            <!-- user login dropdown end -->
+            <li>
+                <div class="toggle-right-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </li>
+        </ul>
+        <!--search & user info end-->
+    </div>
+</header>

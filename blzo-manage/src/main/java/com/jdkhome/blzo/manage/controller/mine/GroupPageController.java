@@ -169,7 +169,7 @@ public class GroupPageController {
         List<GroupAuth> groupAuths = groupBasicService.getGroupAuthByGroupId(groupId);
 
         // 当前用户拥有的所有不是common 的 authjBeans都是可选权限
-        Set<String> allAuth = authjService.getAdminAuth(authjManager.getUserId());
+        Set<String> allAuth = authjService.getAdminAuth(authjManager.getUserId(),authjManager.getUserId());
         List<AuthjBean> authjBeans = new ArrayList<>();
         allAuth.stream()
                 .filter(uri -> authjCache.hasAuthj(uri) && !authjCache.getAuthj(uri).getCommon())

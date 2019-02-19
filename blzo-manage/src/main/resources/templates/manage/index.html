@@ -3,83 +3,115 @@
 <head th:replace="manage/common/head"></head>
 
 <body>
-<!-- topbar starts -->
-<div th:replace="manage/common/topbar"></div>
-<!-- topbar ends -->
 
-<div class="page-content">
-    <div class="row">
-        <div class="col-md-2">
-            <div th:replace="manage/common/menu"></div>
-        </div>
-        <div class="col-md-10">
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
             <div class="row">
-                <div class="col-md-6">
-                    <div class="content-box-large">
-                        <div class="panel-heading">
-                            <div class="panel-title"><span th:text="${obj.nickName}"></span> - 欢迎使用</div>
+                <div class="col-sm-8">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+                            BLZO v1.2.0 新版管理后台 欢迎体验
+                            <hr>
+                            TODO:
+                            <ul>
+                                <li>
+                                    进入页面后，左侧菜单要有高亮标记
+                                </li>
+                                <li>
+                                    权限、菜单管理页面太丑
+                                </li>
+                                <li>
+                                    菜单图标设置
+                                </li>
+                                <li>
+                                    more
+                                </li>
+                            </ul>
+
                         </div>
+                    </section>
+                </div>
+                <div class="col-sm-4">
+                    <section class="panel" th:if="${moreMenu!=null}">
+                        <header class="panel-heading">
+                            提醒
+                            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            您的菜单尚未配置完成，前往
+                            <a class="btn btn-info" th:href="@{${'/manage/mine/layer/modify'}}">
+                                配置菜单
+                            </a>
+                            或者点击
+                            <a class="btn btn-info delete" id="layer-init">
+                                初始化菜单
+                            </a>
+                        </div>
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span th:text="${obj.nickName}"></span> - 欢迎使用
+                            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                        </header>
                         <div class="panel-body">
                             上次登录时间 <span th:text="${#dates.format(obj.lastTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
                             <br><br>
                             上次登录地点 <span th:text="${obj.lastIp}"></span>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12 panel-warning" th:if="${moreMenu!=null}">
-                            <div class="content-box-header panel-heading">
-                                <div class="panel-title ">提示</div>
-                            </div>
-                            <div class="content-box-large box-with-header">
-                                您的菜单尚未配置完成，前往
-                                <a class="btn btn-info" th:href="@{${'/manage/mine/layer/modify'}}">
-                                    配置菜单
-                                </a>
-                                或者点击
-                                <a class="btn btn-info delete" id="layer-init">
-                                    初始化菜单
-                                </a>
-                            </div>
+                    </section>
+                    <section class="panel">
+                        <header class="panel-heading">
+                            快捷入口
+                            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            <a class="btn btn-info"
+                               th:href="@{${'/manage/mine/setting/basic'}}">
+                                修改个人信息
+                            </a>
+                            <a class="btn btn-info"
+                               th:href="@{${'/manage/mine/setting/password'}}">
+                                修改密码
+                            </a>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="content-box-header">
-                                <div class="panel-title">快捷入口</div>
-                            </div>
-                            <div class="content-box-large box-with-header">
-                                <a class="btn btn-info"
-                                   th:href="@{${'/manage/mine/setting/basic'}}">
-                                    修改个人信息
-                                </a>
-                                <a class="btn btn-info"
-                                   th:href="@{${'/manage/mine/setting/password'}}">
-                                    修改密码
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div th:replace="manage/common/box_header"></div>
+                    </section>
 
-                    <div class="content-box-large box-with-header">
-                        <p>blzo-go V1.0.0</p>
-                        <p>慢慢体验</p>
-                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<footer th:replace="manage/common/footer"></footer>
+
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
-<script type="text/javascript" src="/manage/js/page/index.js"></script>
+<script type="text/javascript" src="/manage/custom/page/index.js"></script>
 <script>
     window.onload = function () {
 
@@ -89,6 +121,5 @@
 
     };
 </script>
-
 </body>
 </html>

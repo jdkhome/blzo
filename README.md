@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://www.jdkhome.com/file/FSEz" width="150">
+    <img src="blzo-manage/src/main/resources/static/common/flowers.png" width="150">
     <h3 align="center">BLZO！超级脚手架！</h3>
     <p align="center">
         基于springboot的企业级快速开发脚手架.<br><br>
@@ -37,7 +37,7 @@
 
 用到的其他项目:
 
-- [Bootstrap-Admin-Theme-3](https://github.com/VinceG/Bootstrap-Admin-Theme-3) 管理后台前端模板
+- [BucketAdmin](https://gitee.com/themehub/BucketAdmin) 管理后台前端模板
 - [apidoc](https://github.com/apidoc/apidoc) 生成接口文档
 - [ip2region](https://gitee.com/lionsoul/ip2region) ip地址定位库
 
@@ -143,6 +143,11 @@ todo(待编写。。。)
 
 ### BLZO v1.1.0
 增加[blzo-ex](https://github.com/jdkhome/blzo-ex)项目，将脚手架基础代码封装进jar包，进一步减轻脚手架的重量，增强了扩展性和易用性！
+
+### BLZO v1.2.0
+- 修复循环鉴权BUG
+- 修改管理后台页面(详细见管理后台升级指南)
+
 
 ## 参与开发
 欢迎任何贡献，从设计理念上讲，本项目只作为基础脚手架，如果你想要集成一些通用性强的业务服务(比如会员系统、积分系统这种)或是通用的底层功能(比如日志、操作记录、配置型风控等)，欢迎提交代码到[blzo-ex](https://github.com/jdkhome/blzo-ex)！

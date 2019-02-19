@@ -13,4 +13,3 @@ rootProject.name = 'blzo'
 include 'blzo-core'
 include 'blzo-manage'
 include 'blzo-common'
-

@@ -52,7 +52,7 @@ public class LayerPageController {
     public String modify(Model model) {
 
         // 所有菜单
-        Set<String> allUri = authjService.getAdminAuth(authjManager.getUserId());
+        Set<String> allUri = authjService.getAdminAuth(authjManager.getUserId(),authjManager.getUserId());
         List<AuthjBean> allMenu = new ArrayList<>();
         allUri.stream().filter(uri -> authjCache.hasAuthj(uri) && authjCache.getAuthj(uri).getMenu()).forEach(uri -> allMenu.add(authjCache.getAuthj(uri)));
 
@@ -73,7 +73,7 @@ public class LayerPageController {
             Group group = groupBasicService.getGroupById(groupAdmin.getGroupId());
 
             vo.setName(group.getName());
-            var uris = authjService.getValidAuth(group.getId());
+            var uris = authjService.getValidAuth(group.getId(),group.getCreateAdminId());
             List<AuthjBean> list = new ArrayList<>();
             uris.stream().filter(uri -> authjCache.hasAuthj(uri) && authjCache.getAuthj(uri).getMenu()).forEach(uri -> list.add(authjCache.getAuthj(uri)));
 

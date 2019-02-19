@@ -1,13 +1,13 @@
-<div class="row" th:fragment="paginate" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="col-xs-6">
-        <div class="dataTables_info" id="example_info">
+<div class="row-fluid" th:fragment="paginate" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="span6">
+        <div class="dataTables_info" id="hidden-table-info_info">
             显示 <span th:text="${pageInfo.startRow}"></span> to <span th:text="${pageInfo.endRow}"></span> 共 <span
                 th:text="${pageInfo.total}"></span> 条
         </div>
     </div>
-    <div class="col-xs-6">
-        <div class="dataTables_paginate paging_bootstrap">
-            <ul class="pagination" style="margin: 0px 0px 0px 0px">
+    <div class="span6">
+        <div class="dataTables_paginate paging_bootstrap pagination">
+            <ul>
                 <li id="prev" class="prev " th:classappend="${pageInfo.isFirstPage}?'disabled'"><a
                         href="javascript:void(0);">← 上一页</a></li>
 
@@ -17,7 +17,6 @@
 
                 <li id="next" class="next" th:classappend="${pageInfo.isLastPage}?'disabled'"><a
                         href="javascript:void(0);">下一页 → </a></li>
-
                 <li>
                     <a><input type="text" class="pageNo" style="width: 30px;height: 17px;text-align: center;"
                               onkeyup="this.value=this.value.replace(/\D/g,'')"
@@ -28,7 +27,6 @@
                     <input type="hidden" class="pages" th:value="${pageInfo.pages}"/>
                     <a id="go" style="cursor: pointer;">Go</a>
                 </li>
-
                 <script>
                     var path = "?";
 
@@ -148,7 +146,6 @@
                     })
                     (jQuery);
                 </script>
-
             </ul>
         </div>
     </div>
