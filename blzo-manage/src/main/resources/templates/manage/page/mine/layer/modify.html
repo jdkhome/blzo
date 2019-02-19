@@ -21,38 +21,46 @@
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="navbar-inner">
-                                    <ul class="nav nav-pills">
-                                        <li class="active"><a href="#tab1" data-toggle="tab">继承的菜单</a></li>
-                                        <li class=""><a href="#tab2" data-toggle="tab">所有菜单</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-                                    <div class="tab-pane active well" id="tab1">
-                                        <!--<div class="panel-body">-->
-                                        <div th:each="menuGroup:${menuGroups}">
-                                            <h6 th:text="${'继承自: '+menuGroup.name}">组名</h6>
-                                            <p>
-                                                <button th:each="menu:${menuGroup.menus}"
+
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-dark-navy-blue ">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#extends">继承的菜单</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#all">所有菜单</a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div id="extends" class="tab-pane active">
+                                                <div th:each="menuGroup:${menuGroups}">
+                                                    <h6 th:text="${'继承自: '+menuGroup.name}">组名</h6>
+                                                    <div>
+                                                        <button th:each="menu:${menuGroup.menus}"
+                                                                onclick="addMenu(this)"
+                                                                class="btn btn-primary add-menu"
+                                                                th:attr="value=${menu.uri}" th:text="${menu.name}">
+                                                            管理员列表页
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div id="all" class="tab-pane">
+                                                <button th:each="menu:${allMenu}"
                                                         onclick="addMenu(this)"
                                                         class="btn btn-primary add-menu"
                                                         th:attr="value=${menu.uri}" th:text="${menu.name}">
                                                     管理员列表页
                                                 </button>
-                                            </p>
+                                            </div>
                                         </div>
-                                        <!--</div>-->
+                                    </div>
+                                </section>
 
-                                    </div>
-                                    <div class="tab-pane well" id="tab2">
-                                        <button th:each="menu:${allMenu}"
-                                                onclick="addMenu(this)"
-                                                class="btn btn-primary add-menu"
-                                                th:attr="value=${menu.uri}" th:text="${menu.name}">
-                                            管理员列表页
-                                        </button>
-                                    </div>
-                                </div>
 
                             </div>
                             <div class="row">

@@ -20,109 +20,120 @@
                     <section class="panel">
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
-                                <div class="navbar-inner">
-                                    <ul class="nav nav-pills">
-                                        <li class="active"><a href="#tab1" data-toggle="tab">我继承的权限</a></li>
-                                        <li class=""><a href="#tab2" data-toggle="tab">我创建的权限组</a></li>
-                                        <li class=""><a href="#tab3" data-toggle="tab">创建权限组</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-                                    <div class="tab-pane active well" id="tab1">
-                                        <table class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>组名</th>
-                                                <th>创建者</th>
-                                                <th>权限</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="addGroup:${addGroups}">
-                                                <td th:text="${addGroup.id}">1</td>
-                                                <td th:text="${addGroup.name}">Mark</td>
-                                                <td th:text="${addGroup.createAdminName}">Otto</td>
-                                                <td>
-                                                    <button th:each="groupAuth:${addGroup.auths}"
-                                                            th:text="${groupAuth.name}" class="btn btn-default btn-xs">
-                                                        Default
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-danger btn-xs">退出</button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane well" id="tab2">
-                                        <table class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>组名</th>
-                                                <th>备注</th>
-                                                <th>管理</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="myGroup:${myGroups}">
-                                                <td>
-                                                    <span th:text="${myGroup.id}"></span>
-                                                </td>
-                                                <td>
-                                                    <span class="group-name-span" th:text="${myGroup.name}"></span>
-                                                    <input type="text" class="group-name-input hidden"
-                                                           th:value="${myGroup.name}">
-                                                </td>
-                                                <td>
-                                                    <span class="group-remark-span" th:text="${myGroup.remark}"></span>
-                                                    <input type="text" class="group-remark-input hidden"
-                                                           th:value="${myGroup.remark}">
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-xs group-edit">修改</button>
-                                                    <button class="btn btn-primary btn-xs group-save hidden"
-                                                            th:attr="data-id=${myGroup.id}">保存
-                                                    </button>
 
-                                                    <a class="btn btn-warning btn-xs"
-                                                       th:href="@{${'/manage/mine/group/auth'}(groupId=${myGroup.id})}">授权</a>
-                                                    <a class="btn btn-success btn-xs"
-                                                       th:href="@{${'/manage/mine/group/admin'}(groupId=${myGroup.id})}">成员管理</a>
-                                                    <button class="btn btn-danger btn-xs" id="group-delete"
-                                                            th:attr="data-id=${myGroup.id}">删除组
+                            <section class="panel">
+                                <header class="panel-heading tab-bg-dark-navy-blue ">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#my-auth">我继承的权限</a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#my-group">我创建的权限组</a>
+                                        </li>
+                                        <li class="">
+                                            <a data-toggle="tab" href="#create-group">创建权限组</a>
+                                        </li>
+                                    </ul>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div id="my-auth" class="tab-pane active">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>组名</th>
+                                                    <th>创建者</th>
+                                                    <th>权限</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="addGroup:${addGroups}">
+                                                    <td th:text="${addGroup.id}">1</td>
+                                                    <td th:text="${addGroup.name}">Mark</td>
+                                                    <td th:text="${addGroup.createAdminName}">Otto</td>
+                                                    <td>
+                                                        <button th:each="groupAuth:${addGroup.auths}"
+                                                                th:text="${groupAuth.name}" class="btn btn-default btn-xs">
+                                                            Default
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-xs">退出</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="my-group" class="tab-pane">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>组名</th>
+                                                    <th>备注</th>
+                                                    <th>管理</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="myGroup:${myGroups}">
+                                                    <td>
+                                                        <span th:text="${myGroup.id}"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="group-name-span" th:text="${myGroup.name}"></span>
+                                                        <input type="text" class="group-name-input hidden"
+                                                               th:value="${myGroup.name}">
+                                                    </td>
+                                                    <td>
+                                                        <span class="group-remark-span" th:text="${myGroup.remark}"></span>
+                                                        <input type="text" class="group-remark-input hidden"
+                                                               th:value="${myGroup.remark}">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-xs group-edit">修改</button>
+                                                        <button class="btn btn-primary btn-xs group-save hidden"
+                                                                th:attr="data-id=${myGroup.id}">保存
+                                                        </button>
+
+                                                        <a class="btn btn-warning btn-xs"
+                                                           th:href="@{${'/manage/mine/group/auth'}(groupId=${myGroup.id})}">授权</a>
+                                                        <a class="btn btn-success btn-xs"
+                                                           th:href="@{${'/manage/mine/group/admin'}(groupId=${myGroup.id})}">成员管理</a>
+                                                        <button class="btn btn-danger btn-xs" id="group-delete"
+                                                                th:attr="data-id=${myGroup.id}">删除组
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="create-group" class="tab-pane">
+                                            <div class="panel-body">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label>组名</label>
+                                                        <input type="text" class="form-control" id="group-add-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>备注</label>
+                                                        <input type="text" class="form-control" id="group-add-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </fieldset>
+                                                <div>
+                                                    <button class="btn btn-info btn-xs" id="group-add">
+                                                        <i class="fa fa-save"></i>
+                                                        保存
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane well" id="tab3">
-                                        <div class="panel-body">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label>组名</label>
-                                                    <input type="text" class="form-control" id="group-add-name"
-                                                           placeholder="请输入">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>备注</label>
-                                                    <input type="text" class="form-control" id="group-add-remark"
-                                                           placeholder="请输入">
-                                                </div>
-                                            </fieldset>
-                                            <div>
-                                                <button class="btn btn-info btn-xs" id="group-add">
-                                                    <i class="fa fa-save"></i>
-                                                    保存
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </section>
                             </div>
                     </section>
                 </div>
