@@ -1,6 +1,7 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
 import com.github.pagehelper.PageInfo;
+import com.jdkhome.blzo.common.utils.StringTools;
 import com.jdkhome.blzo.ex.authj.core.*;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
@@ -169,7 +170,7 @@ public class GroupPageController {
         List<GroupAuth> groupAuths = groupBasicService.getGroupAuthByGroupId(groupId);
 
         // 当前用户拥有的所有不是common 的 authjBeans都是可选权限
-        Set<String> allAuth = authjService.getAdminAuth(authjManager.getUserId(),authjManager.getUserId());
+        Set<String> allAuth = authjService.getAdminAuth(authjManager.getUserId(), authjManager.getUserId());
         List<AuthjBean> authjBeans = new ArrayList<>();
         allAuth.stream()
                 .filter(uri -> authjCache.hasAuthj(uri) && !authjCache.getAuthj(uri).getCommon())
@@ -203,7 +204,6 @@ public class GroupPageController {
         model.addAttribute("group", group);
         // 列表
         model.addAttribute("groupAuthVOList", groupAuthVOList);
-
         return "manage/page/mine/group/auth";
     }
 

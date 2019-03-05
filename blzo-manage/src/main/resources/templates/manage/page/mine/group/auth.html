@@ -20,12 +20,30 @@
                     <section class="panel">
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
-                            <div class="panel-heading col-md-12">
-                                <legend>内容</legend>
+                            <div class="col-md-12">
+                                <legend><span th:text="${group.name}"></span> <a id="save"
+                                              class="btn btn-success">保存</a></legend>
                             </div>
                             <input type="hidden" id="groupId" th:value="${group.id}">
-                            <div class="col-md-12">
-                                <table class="table table-striped">
+
+                            <form class="form-horizontal">
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">权限修改</label>
+                                    <div class="col-md-9">
+                                        <select name="country" class="multi-select" multiple="" id="auth_multi_select">
+                                            <option th:each="obj : ${groupAuthVOList}" th:value="${obj.uri}"
+                                                    th:selected="${obj.have}">
+                                                <span th:if="${obj.authjBean!=null && obj.authjBean.getMenu()}">[菜单]</span>
+                                                <span th:text="${obj.authjBean==null?'已失效':obj.authjBean.name}"></span>
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!--<div class="col-md-12">
+                                <table class="table table-striped" id="os-table">
                                     <thead>
                                     <tr>
                                         <th>URI</th>
@@ -36,7 +54,10 @@
                                     <tbody>
                                     <tr th:each="obj : ${groupAuthVOList}">
                                         <td th:text="${obj.uri}"></td>
-                                        <td th:text="${obj.authjBean==null?'已失效':obj.authjBean.name}"></td>
+                                        <td>
+                                            <span th:if="${obj.authjBean!=null && obj.authjBean.getMenu()}">[菜单]</span>
+                                            <span th:text="${obj.authjBean==null?'已失效':obj.authjBean.name}"></span>
+                                        </td>
                                         <td>
                                             <a class="btn btn-info add" th:if="${not obj.have}"
                                                th:attr="data-uri=${obj.uri}">
@@ -51,7 +72,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>-->
                         </div>
                     </section>
                 </div>
@@ -67,6 +88,10 @@
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
+<link rel="stylesheet" type="text/css" href="/manage/js/jquery-multi-select/css/multi-select.css"/>
+<script type="text/javascript" src="/manage/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/manage/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
 <script type="text/javascript" src="/manage/custom/page/mine/group/auth.js"></script>
 <script>
     window.onload = function () {

@@ -1,5 +1,6 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
+import com.jdkhome.blzo.ex.authj.constants.ErrorMsg;
 import com.jdkhome.blzo.ex.authj.core.Authj;
 import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
@@ -8,12 +9,15 @@ import com.jdkhome.blzo.ex.basic.aop.api.Api;
 import com.jdkhome.blzo.ex.basic.enums.BasicResponseError;
 import com.jdkhome.blzo.ex.basic.exception.ServiceException;
 import com.jdkhome.blzo.ex.basic.pojo.ApiResponse;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
 /**
@@ -146,6 +150,33 @@ public class GroupApiController {
 
 
         groupBasicService.delGroupAdmin(groupId, adminId);
+
+
+        return ApiResponse.success();
+
+    }
+
+    @Data
+    class GroupAuthSaveParams {
+
+        @NotNull(message = ErrorMsg.NULL)
+        Integer groupId;
+
+        List<String> uris;
+    }
+
+    @Authj
+    @Api("保存组权限")
+    @RequestMapping(value = "/auth/save", method = RequestMethod.POST)
+    public ApiResponse apiManagerMineGroupAuthSave(@Valid @RequestBody GroupAuthSaveParams params, Errors errors) {
+
+        Group group = groupBasicService.getGroupById(params.groupId);
+        if (!group.getCreateAdminId().equals(authjManager.getUserId())) {
+            log.error("保存组权限 -> 当前用户不是改组的创建者");
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
+        }
+
+        // groupBasicService.addGroupAuth(groupId, uri);
 
 
         return ApiResponse.success();

@@ -73,6 +73,11 @@
         Base.doPost('/api/manage/mine/group/auth/remove', context, data, event, callbacks);
     };
 
+    // 保存权限组关联
+    Request.apiMineGroupAuthSave = function (context, data, event, callbacks) {
+        Base.doPostBody('/api/manage/mine/group/auth/save', context, data, event, callbacks);
+    };
+
     //====管理员个人设置相关====
 
     // 初始化个人Layer
@@ -80,7 +85,7 @@
         Base.doPost('/api/manage/mine/layer/init', context, data, event, callbacks);
     };
 
-    // 修改密码
+    // 修改菜单设置
     Request.apiManagerMineLayerModify = function (context, data, event, callbacks) {
         Base.doPostBody('/api/manage/mine/layer/modify', context, data, event, callbacks);
     };

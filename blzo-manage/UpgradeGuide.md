@@ -45,3 +45,203 @@ xxxx-manage-old 是原来的管理后台模块
 > 注意，原来的搜索按钮，用的是 class="search" 由于和页面模板有冲突，所以换成 id="list-search" 
 
 新旧页面模板、开发模式、技术栈基本一致，但是不排除你在旧版开发时，引入了一些第三方或者实现了一些复杂的功能导致无法兼容，**强烈建议对所有页面测试**。
+
+### 全局替换相关
+
+#### 内容分割符替换
+```
+class="panel-heading col-md-12"
+```
+替换为
+```
+class="col-md-12"
+```
+
+#### 列表页头部替换
+```
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="manage/common/menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div th:replace="manage/common/box_header"></div>
+
+                    <div class="content-box-large box-with-header">
+                        <div class="row">
+```
+替换为
+```
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+```
+
+#### 列表页尾部替换
+```
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer th:replace="manage/common/footer"></footer>
+```
+替换为
+```
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+```
+
+#### 分页器替换
+```
+<div class="row" th:include="manage/common/paginate :: paginate"></div>
+```
+替换为
+```
+<div th:replace="manage/common/paginate"></div>
+```
+
+#### JS路径替换
+```
+<script type="text/javascript" src="/manage/js/page
+```
+替换为
+```
+<script type="text/javascript" src="/manage/custom/page
+```
+
+```
+<script type="text/javascript" src="/manage/js/common/editor
+```
+替换为
+```
+<script type="text/javascript" src="/manage/custom/common/editor
+```
+
+
+
+#### 详情页头部
+```
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+<!-- topbar starts -->
+<div th:replace="manage/common/topbar"></div>
+<!-- topbar ends -->
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="manage/common/menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+```
+替换为
+```
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+```
+
+#### 详情页尾部
+
+```
+</div>
+    </div>
+</div>
+
+<footer th:replace="manage/common/footer"></footer>
+```
+替换为
+```
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+```
+
+
+#### 搜索按钮
+
+```
+<button class="btn btn-default search"><i class="glyphicon glyphicon-search"></i>搜索
+                                </button>
+```
+替换为
+```
+<button class="btn btn-round btn-success" id="list-search">
+                                    <i class="glyphicon glyphicon-search"></i>搜索
+                                </button>
+```
