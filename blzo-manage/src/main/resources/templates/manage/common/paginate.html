@@ -1,11 +1,11 @@
 <div class="row-fluid" th:fragment="paginate" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="span6">
+    <div class="col-lg-6">
         <div class="dataTables_info" id="hidden-table-info_info">
             显示 <span th:text="${pageInfo.startRow}"></span> to <span th:text="${pageInfo.endRow}"></span> 共 <span
                 th:text="${pageInfo.total}"></span> 条
         </div>
     </div>
-    <div class="span6">
+    <div class="col-lg-6">
         <div class="dataTables_paginate paging_bootstrap pagination">
             <ul>
                 <li id="prev" class="prev " th:classappend="${pageInfo.isFirstPage}?'disabled'"><a

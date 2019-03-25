@@ -58,6 +58,7 @@ public class CommonControllerAdvice {
             model.addAttribute("moreMenu", userAuthjConfBean.getMoreMenu());
             nickName = userAuthjConfBean.getName();
             model.addAttribute("login", true);
+            model.addAttribute("userAuthjConfBean", userAuthjConfBean);
         } else {
             model.addAttribute("login", false);
         }

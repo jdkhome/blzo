@@ -21,20 +21,26 @@
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
                             <div class="col-md-12">
-                                <legend><span th:text="${group.name}"></span> <a id="save"
-                                              class="btn btn-success">保存</a></legend>
+                                <legend>组名:<span th:text="${group.name}"></span></legend>
                             </div>
                             <input type="hidden" id="groupId" th:value="${group.id}">
 
                             <form class="form-horizontal">
                                 <div class="form-group last">
-                                    <label class="control-label col-md-3">权限修改</label>
-                                    <div class="col-md-9">
+                                    <style>
+                                        #ms-auth_multi_select {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                    <div class="col-md-12">
                                         <select name="country" class="multi-select" multiple="" id="auth_multi_select">
-                                            <option th:each="obj : ${groupAuthVOList}" th:value="${obj.uri}"
-                                                    th:selected="${obj.have}">
-                                                <span th:if="${obj.authjBean!=null && obj.authjBean.getMenu()}">[菜单]</span>
-                                                <span th:text="${obj.authjBean==null?'已失效':obj.authjBean.name}"></span>
+                                            <option th:each="obj : ${groupAuthVOList}"
+                                                    th:if="${obj.authjBean!=null}"
+                                                    th:selected="${obj.have}"
+                                                    th:value="${obj.uri}">
+                                                <span th:if="${obj.authjBean.getMenu()}">[菜单]</span>
+                                                <span th:text="${obj.authjBean.name}"></span>
+                                                (<span th:text="${obj.authjBean.uri}"></span>)
                                             </option>
                                         </select>
 
@@ -42,6 +48,29 @@
                                 </div>
 
                             </form>
+
+                            <div class="col-md-12">
+                                <legend></legend>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <!--<button class="btn btn-sm btn-success" id="list-search">-->
+                                        <!--<i class="glyphicon glyphicon-search"></i>筛选-->
+                                        <!--</button>-->
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <a id="save"
+                                           class="btn btn-success">保存</a></legend>
+
+                                        <!--<a class="btn btn-primary btn-sm" href="/manage/system/admin/add"> 添加管理员<i-->
+                                        <!--class="fa fa-plus"></i></a>-->
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <!--<div class="col-md-12">
                                 <table class="table table-striped" id="os-table">
                                     <thead>

@@ -56,18 +56,4 @@ public class IndexPageController {
     }
 
 
-    @RequestMapping({"/blank"})
-    @Authj(value = "空页面",auth=false)
-    public String blank(Model model, HttpServletRequest request) {
-
-        return "manage/blank";
-    }
-
-    @RequestMapping({"/list"})
-    @Authj(value = "列表页",auth=false)
-    public String list(Model model, HttpServletRequest request) {
-
-        return "manage/list";
-    }
-
 }

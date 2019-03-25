@@ -1,7 +1,5 @@
 package com.jdkhome.blzo.manage.controller.mine;
 
-import com.github.pagehelper.PageInfo;
-import com.jdkhome.blzo.common.utils.StringTools;
 import com.jdkhome.blzo.ex.authj.core.*;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
@@ -102,8 +100,8 @@ public class GroupPageController {
      */
     @Authj("组成员页")
     @RequestMapping("/admin")
-    public String groupAdmin(Model model, HttpServletRequest request,
-                             PageRequest pageRequest,
+    public String groupAdmin(Model model,
+                             @RequestParam(value = "organizeId", required = false) Integer organizeId,
                              @RequestParam(value = "groupId", required = true) Integer groupId) {
 
         Group group = groupBasicService.getGroupById(groupId);
@@ -113,35 +111,41 @@ public class GroupPageController {
             throw new ServiceException(BasicResponseError.NO_PERMISSION);
         }
 
-        if (pageRequest == null) {
-            pageRequest = new PageRequest();
+
+        // 非0号组织则只能看自己的数据
+        if (0 != authjManager.getOrganizeId()) {
+            organizeId = authjManager.getOrganizeId();
         }
 
         //组信息
         model.addAttribute("group", group);
 
         //获取所有管理员
-        PageInfo pageInfo = adminBasicService.getAdminsWithPage(null, null, null, null, pageRequest.getPage(), pageRequest.getSize());
+        List<Admin> adminList = adminBasicService.getAllAdmin(organizeId, null, null, null, null);
 
         //获取组内所有管理员Id
-
         Set<Integer> adminSet = new HashSet<>();
         groupBasicService.getGroupAdminByGroupId(groupId).stream().forEach(groupAdmin -> adminSet.add(groupAdmin.getAdminId()));
 
-        List<GroupAdminVO> list = new ArrayList<>(pageInfo.getSize());
-        List<Admin> adminList = pageInfo.getList();
+        List<GroupAdminVO> listInside = new ArrayList<>(adminSet.size());
+        List<GroupAdminVO> listOther = new ArrayList<>();
         adminList.stream().forEach(admin -> {
             GroupAdminVO groupAdminVO = new GroupAdminVO();
             BeanUtils.copyProperties(admin, groupAdminVO);
 
             //查看是否有关联
-            groupAdminVO.setHave(adminSet.contains(admin.getId()));
-            list.add(groupAdminVO);
+            if (adminSet.contains(admin.getId())) {
+                groupAdminVO.setHave(true);
+                listInside.add(groupAdminVO);
+            }else{
+                groupAdminVO.setHave(false);
+                listOther.add(groupAdminVO);
+            }
         });
-        pageInfo.setList(list);
 
-        //组信息
-        model.addAttribute("pageInfo", pageInfo);
+
+        model.addAttribute("listInside", listInside);
+        model.addAttribute("listOther", listOther);
 
         return "manage/page/mine/group/admin";
     }
@@ -204,6 +208,7 @@ public class GroupPageController {
         model.addAttribute("group", group);
         // 列表
         model.addAttribute("groupAuthVOList", groupAuthVOList);
+
         return "manage/page/mine/group/auth";
     }
 

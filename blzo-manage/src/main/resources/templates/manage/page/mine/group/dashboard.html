@@ -28,16 +28,14 @@
                                             <a data-toggle="tab" href="#my-auth">我继承的权限</a>
                                         </li>
                                         <li class="">
-                                            <a data-toggle="tab" href="#my-group">我创建的权限组</a>
-                                        </li>
-                                        <li class="">
-                                            <a data-toggle="tab" href="#create-group">创建权限组</a>
+                                            <a data-toggle="tab" href="#my-group">我的权限组</a>
                                         </li>
                                     </ul>
                                 </header>
                                 <div class="panel-body">
                                     <div class="tab-content">
                                         <div id="my-auth" class="tab-pane active">
+                                            <p th:if="${userAuthjConfBean.id==0}">您是超级管理员，拥有本系统所有权限</p>
                                             <table class="table table-hover">
                                                 <thead>
                                                 <tr>
@@ -50,13 +48,18 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="addGroup:${addGroups}">
-                                                    <td th:text="${addGroup.id}">1</td>
-                                                    <td th:text="${addGroup.name}">Mark</td>
-                                                    <td th:text="${addGroup.createAdminName}">Otto</td>
+                                                    <td th:text="${addGroup.id}"></td>
+                                                    <td th:text="${addGroup.name}"></td>
+                                                    <td th:text="${addGroup.createAdminName}"></td>
                                                     <td>
+                                                        <style>
+                                                            .btn-body {
+                                                                margin: 1px;
+                                                            }
+                                                        </style>
                                                         <button th:each="groupAuth:${addGroup.auths}"
-                                                                th:text="${groupAuth.name}" class="btn btn-default btn-xs">
-                                                            Default
+                                                                th:text="${groupAuth.name}"
+                                                                class="btn btn-default btn-xs btn-body">
                                                         </button>
                                                     </td>
                                                     <td>
@@ -67,6 +70,20 @@
                                             </table>
                                         </div>
                                         <div id="my-group" class="tab-pane">
+                                            <div class="col-md-12">
+                                                <div class="clearfix">
+                                                    <div class="btn-group">
+                                                        <p>您可以将自己拥有的权限通过权限组的方式传递给其他人</p>
+                                                    </div>
+                                                    <div class="btn-group pull-right">
+                                                        <a href="#add-group" data-toggle="modal"
+                                                           class="btn btn-xs btn-primary">
+                                                            添加<i class="fa fa-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                             <table class="table table-hover">
                                                 <thead>
                                                 <tr>
@@ -78,63 +95,112 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="myGroup:${myGroups}">
+                                                    <td th:text="${myGroup.id}"></td>
+                                                    <td th:text="${myGroup.name}"></td>
+                                                    <td th:text="${myGroup.remark}"></td>
                                                     <td>
-                                                        <span th:text="${myGroup.id}"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="group-name-span" th:text="${myGroup.name}"></span>
-                                                        <input type="text" class="group-name-input hidden"
-                                                               th:value="${myGroup.name}">
-                                                    </td>
-                                                    <td>
-                                                        <span class="group-remark-span" th:text="${myGroup.remark}"></span>
-                                                        <input type="text" class="group-remark-input hidden"
-                                                               th:value="${myGroup.remark}">
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-xs group-edit">修改</button>
-                                                        <button class="btn btn-primary btn-xs group-save hidden"
-                                                                th:attr="data-id=${myGroup.id}">保存
-                                                        </button>
 
                                                         <a class="btn btn-warning btn-xs"
                                                            th:href="@{${'/manage/mine/group/auth'}(groupId=${myGroup.id})}">授权</a>
                                                         <a class="btn btn-success btn-xs"
                                                            th:href="@{${'/manage/mine/group/admin'}(groupId=${myGroup.id})}">成员管理</a>
-                                                        <button class="btn btn-danger btn-xs" id="group-delete"
-                                                                th:attr="data-id=${myGroup.id}">删除组
-                                                        </button>
+                                                        <a href="#edit-group" data-toggle="modal"
+                                                           class="btn btn-xs btn-primary edit-group-btn">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a data-toggle="modal"
+                                                           class="btn btn-xs btn-danger del-group-btn">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div id="create-group" class="tab-pane">
-                                            <div class="panel-body">
-                                                <fieldset>
-                                                    <div class="form-group">
-                                                        <label>组名</label>
-                                                        <input type="text" class="form-control" id="group-add-name"
-                                                               placeholder="请输入">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>备注</label>
-                                                        <input type="text" class="form-control" id="group-add-remark"
-                                                               placeholder="请输入">
-                                                    </div>
-                                                </fieldset>
-                                                <div>
-                                                    <button class="btn btn-info btn-xs" id="group-add">
-                                                        <i class="fa fa-save"></i>
-                                                        保存
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </section>
+                            <!-- 添加面板 -->
+                            <div aria-hidden="true" aria-labelledby="add-group-label"
+                                 role="dialog" tabindex="-1" id="add-group" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">创建权限组</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <input type="hidden" class="form-control" id="add-id">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">组名</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">将创建新的权限组</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="group-add"
+                                                           class="btn btn-success pull-right">创建</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- 编辑面板 -->
+                            <div aria-hidden="true" aria-labelledby="edit-group-label"
+                                 role="dialog" tabindex="-1" id="edit-group" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">组信息修改</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <input type="hidden" class="form-control" id="edit-id">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">组名</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">保存组信息</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="group-save"
+                                                           class="btn btn-success pull-right">保存</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>

@@ -10,7 +10,6 @@
         init: function () {
             var _this = this;
 
-
             $('#layer-init').click(function (event) {
                 var obj = {};
 

@@ -2,13 +2,18 @@ package com.jdkhome.blzo.manage.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.jdkhome.blzo.ex.authj.core.Authj;
+import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.enums.AdminStatusEnum;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
+import com.jdkhome.blzo.ex.authj.generator.model.Organize;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
+import com.jdkhome.blzo.ex.authj.service.OrganizeBasicService;
+import com.jdkhome.blzo.ex.authj.validator.OrganizeValidator;
 import com.jdkhome.blzo.ex.basic.pojo.PageRequest;
 import com.jdkhome.blzo.ex.ip2region.ip_tool.IpRegionTools;
 import com.jdkhome.blzo.ex.utils.tools.IpTools;
 import com.jdkhome.blzo.manage.pojo.vo.system.AdminVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,21 +30,32 @@ import java.util.List;
  * 后台菜单管理
  * 管理员
  */
+@Slf4j
 @Controller
 @RequestMapping("/manage/system/admin")
 public class AdminPageController {
 
+    @Autowired
+    OrganizeValidator organizeValidator;
 
     @Autowired
     AdminBasicService adminBasicService;
 
+    @Autowired
+    AuthjManager authjManager;
+
+    @Autowired
+    OrganizeBasicService organizeBasicService;
+
     /**
      * 管理员列表
+     * todo 修改组织
      */
     @RequestMapping("/list")
     @Authj(value = "管理员列表", menu = true)
     public String adminList(Model model, HttpServletRequest request,
                             PageRequest pageRequest,
+                            @RequestParam(value = "organizeId", required = false) Integer organizeId,
                             @RequestParam(value = "userName", required = false) String userName,
                             @RequestParam(value = "nickName", required = false) String nickName,
                             @RequestParam(value = "phone", required = false) String phone
@@ -49,8 +65,13 @@ public class AdminPageController {
             pageRequest = new PageRequest();
         }
 
+        // 非0号组织则只能看自己的数据
+        if (0 != authjManager.getOrganizeId()) {
+            organizeId = authjManager.getOrganizeId();
+        }
+
         //获取管理员列表
-        PageInfo pageInfo = adminBasicService.getAdminsWithPage(userName, nickName, phone, null, pageRequest.getPage(), pageRequest.getSize());
+        PageInfo pageInfo = adminBasicService.getAdminsWithPage(organizeId, userName, nickName, phone, null, pageRequest.getPage(), pageRequest.getSize());
         List<Admin> admins = pageInfo.getList();
 
         List<AdminVO> vos = new ArrayList<>(admins.size());
@@ -70,34 +91,14 @@ public class AdminPageController {
 
         AdminStatusEnum[] adminStatusEnums = AdminStatusEnum.values();
 
+
+        List<Organize> organizes = organizeBasicService.getAllOrganize(null, null, null, null);
+
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("adminStatusEnums", adminStatusEnums);
+        model.addAttribute("organizes", organizes);
+
         return "manage/page/system/admin/list";
-    }
-
-    /**
-     * 管理员密码重置
-     */
-    @RequestMapping("/edit")
-    @Authj("管理员编辑页")
-    public String adminEdit(Model model, HttpServletRequest request,
-                            @RequestParam(value = "adminId", required = true) Integer adminId) {
-
-        Admin obj = adminBasicService.getAdminById(adminId);
-
-        model.addAttribute("obj", obj);
-
-        return "manage/page/system/admin/edit";
-    }
-
-    /**
-     * 创建管理员页面
-     */
-    @Authj(value = "创建管理员页面", menu = true)
-    @RequestMapping("/add")
-    public String adminAdd(Model model, HttpServletRequest request) {
-
-        return "manage/page/system/admin/add";
     }
 
 }

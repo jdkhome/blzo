@@ -10,82 +10,43 @@
         init: function () {
             var _this = this;
 
-            $('.add').click(function (event) {
-                request.apiMineGroupAuthAdd($(document), {
-                    groupId: $("#groupId").val(),
-                    uri: $(this).data('uri')
-                }, 'groupAuthAdd');
-
+            // === 响应事件 === //
+            // 同步响应=> 成功后自动刷新页面
+            $(document).on('api-with-sync', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: data.msg
+                    }).show();
+                } else {
+                    new NotificationFx({
+                        message: data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
             });
-            $('.remove').click(function (event) {
 
-                request.apiMineGroupAuthRemove($(document), {
-                    groupId: $("#groupId").val(),
-                    uri: $(this).data('uri')
-                }, 'groupAuthRemove');
+            // 非同步响应=> 如果失败则刷新页面
+            $(document).on('api-without-sync', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: "失去同步:" + data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
             });
 
             $('#save').click(function (event) {
-                request.apiMineGroupAuthSave($(document), JSON.stringify({
+                request.apiManagerMineGroupAuthSet($(document), JSON.stringify({
                     groupId: $("#groupId").val(),
                     uris: $("#auth_multi_select").val()
-                }), 'groupAuthAdd');
+                }), 'api-with-sync');
 
             });
 
-
-            $(document).on('groupAuthAdd', function (msg, data) {
-                if (data.code != 200) {
-                    new NotificationFx({
-                        message: data.msg
-                    }).show();
-                } else {
-                    new NotificationFx({
-                        message: data.msg,
-                        onClose: function () {
-                            location.reload();
-                        }
-                    }).show();
-                }
-            });
-            $(document).on('groupAuthRemove', function (msg, data) {
-                if (data.code != 200) {
-                    new NotificationFx({
-                        message: data.msg
-                    }).show();
-                } else {
-                    new NotificationFx({
-                        message: data.msg,
-                        onClose: function () {
-                            location.reload();
-                        }
-                    }).show();
-                }
-            });
-
-            // 表格
-            // var oTable = $('#os-table').dataTable({
-            //     "aLengthMenu": [
-            //         [5, 15, 20, -1],
-            //         [5, 15, 20, "All"] // change per page values here
-            //     ],
-            //     // set the initial value
-            //     "iDisplayLength": 5,
-            //     "sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-6'i><'col-lg-6'p>>",
-            //     "sPaginationType": "bootstrap",
-            //     "oLanguage": {
-            //         "sLengthMenu": "_MENU_ records per page",
-            //         "oPaginate": {
-            //             "sPrevious": "上一页",
-            //             "sNext": "下一页"
-            //         }
-            //     },
-            //     "aoColumnDefs": [{
-            //         'bSortable': false,
-            //         'aTargets': [0]
-            //     }
-            //     ]
-            // });
 
             $('#auth_multi_select').multiSelect({
                 selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='在所有权限中查找...'>",

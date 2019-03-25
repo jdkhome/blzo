@@ -25,7 +25,7 @@ public class DemoController {
      */
     @Authj(value = "demo接口1", auth = true, menu = false, common = false)
     @ResponseBody
-    @RequestMapping(value = "/api/manage/demo/api_1", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/manage/demo/xxapi_1", method = RequestMethod.POST)
     public ApiResponse apiManagerDemoApi1() {
         return ApiResponse.success();
     }
@@ -35,7 +35,7 @@ public class DemoController {
      * @return
      */
     @Authj(value = "demo页面1", auth = true, menu = true, common = false)
-    @RequestMapping("/manage/demo/page_1")
+    @RequestMapping("/manage/demo/xxpage_1")
     public String groupAuth() {
         return "manage/demo";
     }

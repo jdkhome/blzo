@@ -20,8 +20,11 @@
                     <section class="panel">
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
-                            <div class="row">
-
+                                <style>
+                                    .btn-body {
+                                        margin: 1px;
+                                    }
+                                </style>
                                 <section class="panel">
                                     <header class="panel-heading tab-bg-dark-navy-blue ">
                                         <ul class="nav nav-tabs">
@@ -41,7 +44,7 @@
                                                     <div>
                                                         <button th:each="menu:${menuGroup.menus}"
                                                                 onclick="addMenu(this)"
-                                                                class="btn btn-primary add-menu"
+                                                                class="btn btn-primary add-menu btn-body"
                                                                 th:attr="value=${menu.uri}" th:text="${menu.name}">
                                                             管理员列表页
                                                         </button>
@@ -52,7 +55,7 @@
                                             <div id="all" class="tab-pane">
                                                 <button th:each="menu:${allMenu}"
                                                         onclick="addMenu(this)"
-                                                        class="btn btn-primary add-menu"
+                                                        class="btn btn-primary add-menu btn-body"
                                                         th:attr="value=${menu.uri}" th:text="${menu.name}">
                                                     管理员列表页
                                                 </button>
@@ -61,62 +64,60 @@
                                     </div>
                                 </section>
 
-
+                            <div class="col-md-12">
+                                <legend></legend>
+                                <p>选择一个菜单组来添加菜单</p>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <legend>我的配置</legend>
-                                </div>
 
-                                <div class="panel-body">
-                                    <table class="table table-condensed">
-                                        <thead>
-                                        <tr>
-                                            <th width="20%">菜单组</th>
-                                            <th width="60%">内容</th>
-                                            <th width="20%">操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="my-layer-table">
-                                        <tr ondrop="drop(event,this)" ondragover="allowDrop(event)"
-                                            draggable="true" ondragstart="drag(event, this)"
-                                            th:each="layer:${layerList}">
-                                            <td>
-                                                <div class="input-group">
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th width="20%">菜单组</th>
+                                        <th width="60%">内容</th>
+                                        <th width="20%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="my-layer-table">
+                                    <tr ondrop="drop(event,this)" ondragover="allowDrop(event)"
+                                        draggable="true" ondragstart="drag(event, this)"
+                                        th:each="layer:${layerList}">
+                                        <td>
+                                            <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <span class="onoffswitch">
                                                             <input type="radio" name="select-layer">
                                                         </span>
                                                     </span>
-                                                    <input class="form-control layer-name" th:value="${layer.name}"
-                                                           type="text">
-                                                </div>
-                                            </td>
-                                            <td class="layer-menus">
-                                                <button class="btn btn-danger remove-menu"
-                                                        ondrop="drop(event,this)" ondragover="allowDrop(event)"
-                                                        draggable="true" ondragstart="drag(event, this)"
-                                                        th:each="menu:${layer.menus}" th:attr="value=${menu.uri}"
-                                                        th:text="${menu.name}"
-                                                        onclick="removeMenu(this)">
-                                                    管理员列表页
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-danger remove-layer" onclick="removeLayer(this)">
-                                                    移除
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <button class="btn btn-info btn-sm" id="add-layer">新增</button>
-                                    <button class="btn btn-success btn-sm" id="layer-save">保存</button>
-                                    <button class="btn btn-warning btn-sm" id="layer-init">初始化</button>
-                                </div>
-                            </div>
+                                                <input class="form-control layer-name" th:value="${layer.name}"
+                                                       type="text">
+                                            </div>
+                                        </td>
+                                        <td class="layer-menus">
+                                            <button class="btn btn-danger remove-menu btn-body"
+                                                    ondrop="drop(event,this)" ondragover="allowDrop(event)"
+                                                    draggable="true" ondragstart="drag(event, this)"
+                                                    th:each="menu:${layer.menus}" th:attr="value=${menu.uri}"
+                                                    th:text="${menu.name}"
+                                                    onclick="removeMenu(this)">
+                                                管理员列表页
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger remove-layer" onclick="removeLayer(this)">
+                                                移除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-info btn-sm" id="add-layer">新增</button>
+                                <button class="btn btn-success btn-sm" id="layer-save">保存</button>
+                                <button class="btn btn-warning btn-sm" id="layer-init">初始化</button>
 
+                            </div>
                         </div>
+
                     </section>
                 </div>
             </div>
@@ -131,14 +132,13 @@
 
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
-
 <script type="text/javascript" src="/manage/custom/page/mine/layer/modify.js"></script>
 <script>
 
     function addMenu(_this) {
         $("input[name='select-layer']:checked").parents('tr').find('.layer-menus:first')
             .append(`
-                        <button class="btn btn-danger remove-menu"
+                        <button class="btn btn-danger btn-xs remove-menu btn-body"
                         ondrop="drop(event,this)" ondragover="allowDrop(event)"
                         draggable="true" ondragstart="drag(event, this)"
                         onclick="removeMenu(this)" value="${$(_this).attr('value')}" >

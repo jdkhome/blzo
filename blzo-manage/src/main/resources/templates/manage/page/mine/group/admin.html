@@ -16,13 +16,17 @@
         <section class="wrapper">
             <!-- page start-->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <section class="panel">
-                        <header th:replace="manage/common/box-header"></header>
+                        <header class="panel-heading">
+                            <span th:text="${group.name}">组名</span>-<span>组内成员</span>
+                            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:location.reload();" class="fa fa-refresh"></a>
+                            <a href="javascript:history.go(-1);" class="fa fa-mail-reply"></a>
+                            </span>
+                        </header>
                         <div class="panel-body">
-                            <div class="panel-heading  col-md-12">
-                                <legend>内容</legend>
-                            </div>
                             <input type="hidden" id="groupId" th:value="${group.id}">
                             <div class="col-md-12">
                                 <table class="table table-striped">
@@ -36,17 +40,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                    <tr th:each="obj,objStatus : ${listInside}">
                                         <td th:text="${obj.id}"></td>
                                         <td th:text="${obj.nickName}"></td>
                                         <td th:text="${obj.username}"></td>
                                         <td th:text="${obj.phone}"></td>
                                         <td>
-                                            <a class="btn btn-info add" th:if="${not obj.have}"
+                                            <a class="btn btn-xs btn-info add" th:if="${not obj.have}"
                                                th:attr="data-id=${obj.id}">
                                                 添加
                                             </a>
-                                            <a class="btn btn-danger remove" th:if="${obj.have}"
+                                            <a class="btn btn-xs btn-danger remove" th:if="${obj.have}"
                                                th:attr="data-id=${obj.id}">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                                 移除
@@ -55,7 +59,53 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div th:replace="manage/common/paginate"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span th:text="${group.name}">组名</span>-<span>组外成员</span>
+                            <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:location.reload();" class="fa fa-refresh"></a>
+                            <a href="javascript:history.go(-1);" class="fa fa-mail-reply"></a>
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            <input type="hidden" id="groupId" th:value="${group.id}">
+                            <div class="col-md-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>昵称</th>
+                                        <th>登录名</th>
+                                        <th>手机号</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="obj,objStatus : ${listOther}">
+                                        <td th:text="${obj.id}"></td>
+                                        <td th:text="${obj.nickName}"></td>
+                                        <td th:text="${obj.username}"></td>
+                                        <td th:text="${obj.phone}"></td>
+                                        <td>
+                                            <a class="btn btn-xs btn-info add" th:if="${not obj.have}"
+                                               th:attr="data-id=${obj.id}">
+                                                添加
+                                            </a>
+                                            <a class="btn btn-xs btn-danger remove" th:if="${obj.have}"
+                                               th:attr="data-id=${obj.id}">
+                                                <i class="glyphicon glyphicon-remove"></i>
+                                                移除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </section>

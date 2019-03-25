@@ -10,27 +10,9 @@
         init: function () {
             var _this = this;
 
-            $('.group-edit').click(function (event) {
-                $(this).parents('tr').find('.group-name-input:first').removeClass('hidden');
-                $(this).parents('tr').find('.group-remark-input:first').removeClass('hidden');
-                $(this).parents('tr').find('.group-save:first').removeClass('hidden');
-
-                $(this).parents('tr').find('.group-name-span:first').addClass('hidden');
-                $(this).parents('tr').find('.group-remark-span:first').addClass('hidden');
-                $(this).parents('tr').find('.group-edit:first').addClass('hidden');
-
-            });
-            $('.group-save').click(function (event) {
-                var obj = {
-                    "groupId": $(this).data('id'),
-                    "name": $(this).parents('tr').find('.group-name-input:first').val(),
-                    "remark": $(this).parents('tr').find('.group-remark-input:first').val()
-                };
-
-                request.apiMineGroupEdit($(document), obj, 'groupEdit');
-            });
-
-            $(document).on('groupEdit', function (msg, data) {
+            // === 响应事件 === //
+            // 同步响应=> 成功后自动刷新页面
+            $(document).on('api-with-sync', function (msg, data) {
                 if (data.code != 200) {
                     new NotificationFx({
                         message: data.msg
@@ -45,55 +27,70 @@
                 }
             });
 
+            // 非同步响应=> 如果失败则刷新页面
+            $(document).on('api-without-sync', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: "失去同步:" + data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
+            });
+
+            // === 编辑组 === //
+
+            var edit_group_id;
+            var edit_group_name;
+            var edit_group_remark;
+
+            /**
+             * 编辑组按钮被点击，保存被点击组的信息
+             */
+            $('.edit-group-btn').click(function (event) {
+
+                edit_group_id = $($(this).parents('tr').first().children('td')[0]).text();
+                edit_group_name = $($(this).parents('tr').first().children('td')[1]).text();
+                edit_group_remark = $($(this).parents('tr').first().children('td')[2]).text();
+
+                $('#edit-id').val(edit_group_id);
+                $('#edit-name').val(edit_group_name);
+                $('#edit-remark').val(edit_group_remark);
+            });
+
+            $('#group-save').click(function (event) {
+                var obj = {
+                    "groupId": $('#edit-id').val(),
+                    "name": $('#edit-name').val(),
+                    "remark": $('#edit-remark').val()
+                };
+                request.apiMineGroupEdit($(document), obj, 'api-with-sync');
+            });
+
+
+
+            // === 填加组 === //
 
             $('#group-add').click(function (event) {
 
-
                 var obj = {
-                    "name": $('#group-add-name').val(),
-                    "remark": $('#group-add-remark').val()
+                    "name": $('#add-name').val(),
+                    "remark": $('#add-remark').val()
                 };
-
-                console.log(obj);
-
-                request.apiMineGroupAdd($(document), obj, 'groupAdd');
+                request.apiMineGroupAdd($(document), obj, 'api-with-sync');
             });
 
-            $(document).on('groupAdd', function (msg, data) {
-                if (data.code != 200) {
-                    new NotificationFx({
-                        message: data.msg
-                    }).show();
-                } else {
-                    new NotificationFx({
-                        message: data.msg,
-                        onClose: function () {
-                            location.reload();
-                        }
-                    }).show();
+            // === 删除组 === //
+            $('.del-group-btn').click(function (event) {
+                if (confirm("确定要删除?") == false) {
+                    return;
                 }
-            });
-
-            $('#group-delete').click(function (event) {
-                var groupId = $(this).data('id');
                 request.apiMineGroupDel($(document), {
-                    groupId: groupId
-                }, 'groupDelete');
+                    groupId: $($(this).parents('tr').first().children('td')[0]).text()
+                }, 'api-with-sync');
             });
-            $(document).on('groupDelete', function (msg, data) {
-                if (data.code != 200) {
-                    new NotificationFx({
-                        message: data.msg
-                    }).show();
-                } else {
-                    new NotificationFx({
-                        message: data.msg,
-                        onClose: function () {
-                            location.reload();
-                        }
-                    }).show();
-                }
-            });
+
 
         },
         select: function (id) {
