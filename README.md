@@ -14,13 +14,10 @@
 
 
 > BLZO是一个基于springboot的企业级快速开发脚手架。包含了一个简单易用(无论是对用户还是开发者)且功能强大的管理后台！十分适合中小型项目快速迭代。  
-> 使用 [jdk11](http://openjdk.java.net/) 环境，[gradle 4.10/5.0](https://gradle.org/) 或以上版本 推荐使用[idea](https://www.jetbrains.com/idea/)进行开发  
+> 使用 [jdk11](http://openjdk.java.net/) (使用jdk8亦可轻松降级)环境，[gradle 4.10/5.0](https://gradle.org/) 或以上版本 推荐使用[idea](https://www.jetbrains.com/idea/)进行开发  
 
 市面上的权限管理脚手架有很多，如果你正在寻找合适的项目，请一定继续阅读，本项目的权限管理，相对其他项目(要手动配置权限地址、菜单的)，具有**极大**的优势！
 
-> 点下面前往 BLZO的 jdk8+springboot2.0 版本  
-> - [github](https://github.com/jdkhome/blzo-jdk8) 
-> - [gitee](https://gitee.com/jdkhome/blzo-jdk8)
 
 关联项目 [blzo-ex](https://github.com/jdkhome/blzo-ex) BLZO脚手架扩展
 
@@ -147,6 +144,10 @@ todo(待编写。。。)
 ### BLZO v1.2.0
 - 修复循环鉴权BUG
 - 修改管理后台页面(详细见管理后台升级指南)
+
+### BLZO v1.3.0
+- 增加组织功能
+- 优化体验
 
 
 ## 参与开发
