@@ -31,6 +31,29 @@
                 }
             });
 
+            $('#remove-google-auth').click(function (event) {
+                var obj = {};
+
+                request.apiManagerMineSettingGoogleAuthRemove($(document), obj, 'remove-google-auth-callback');
+            });
+
+            $(document).on('remove-google-auth-callback', function (msg, data) {
+                if (data.code != 200) {
+                    new NotificationFx({
+                        message: data.msg
+                    }).show();
+                } else {
+                    new NotificationFx({
+                        message: data.msg,
+                        onClose: function () {
+                            location.reload();
+                        }
+                    }).show();
+                }
+            });
+
+
+
         },
         select: function (id) {
             var num = 0;

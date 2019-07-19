@@ -62,6 +62,30 @@
                         </div>
                     </section>
                     <section class="panel">
+                                            <header class="panel-heading">
+                                                提醒
+                                                <span class="tools pull-right">
+                                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                                <a href="javascript:;" class="fa fa-times"></a>
+                                             </span>
+                                            </header>
+                                            <div class="panel-body" th:if="${#strings.isEmpty(obj.googleSecret)}">
+                                                强烈建议使用google身份校验进行登录,更安全!
+                                                <a class="btn btn-info" th:href="@{${'/manage/mine/setting/google_auth'}}">
+                                                   前往设置
+                                                </a>
+                                            </div>
+                                            <div class="panel-body" th:if="${!#strings.isEmpty(obj.googleSecret)}">
+                                                您已启用google身份校验,您可以
+                                                <a class="btn btn-info" th:href="@{${'/manage/mine/setting/google_auth'}}">
+                                                   重新设置(覆盖)
+                                                </a>
+                                                <a class="btn btn-info" id="remove-google-auth">
+                                                   取消使用(使用密码登陆)
+                                                </a>
+                                            </div>
+                                        </section>
+                    <section class="panel">
                         <header class="panel-heading">
                             <span th:text="${obj.nickName}"></span> - 欢迎使用
                             <span class="tools pull-right">

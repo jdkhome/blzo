@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.1.1.RELEASE'
-        blzoExVersion = '0.1.2.RELEASE'
+        blzoExVersion = '0.2.2.RELEASE'
     }
     repositories {
         mavenLocal()

@@ -147,5 +147,23 @@ public class AdminApiController {
 
     }
 
+    @RequestMapping(value = "/google_auth_remove", method = RequestMethod.POST)
+    @Authj
+    @Api("移除管理员google验证码")
+    public ApiResponse apiManagerSystemAdminGoogleAuthRemove(HttpServletRequest request, HttpServletResponse response,
+                                                             @RequestParam(value = "adminId", required = true) Integer adminId,
+                                                             @RequestParam(value = "organizeId", required = true) Integer organizeId
+    ) {
+
+        if (!organizeValidator.validAdmin(adminId)) {
+            log.error("移除管理员google验证码 -> 组织鉴权不通过");
+            throw new ServiceException(BasicResponseError.NO_PERMISSION);
+        }
+
+        adminService.removeGoogleAuth(adminId);
+
+        return ApiResponse.success();
+
+    }
 
 }
