@@ -151,8 +151,8 @@ public class AdminApiController {
     @Authj
     @Api("移除管理员google验证码")
     public ApiResponse apiManagerSystemAdminGoogleAuthRemove(HttpServletRequest request, HttpServletResponse response,
-                                                             @RequestParam(value = "adminId", required = true) Integer adminId,
-                                                             @RequestParam(value = "organizeId", required = true) Integer organizeId
+                                                      @RequestParam(value = "adminId", required = true) Integer adminId,
+                                                      @RequestParam(value = "organizeId", required = true) Integer organizeId
     ) {
 
         if (!organizeValidator.validAdmin(adminId)) {
@@ -165,5 +165,6 @@ public class AdminApiController {
         return ApiResponse.success();
 
     }
+
 
 }

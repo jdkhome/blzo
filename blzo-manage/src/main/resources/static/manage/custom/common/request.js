@@ -10,9 +10,9 @@
     function Request() {
     }
 
-    // DEMO API 1
-    Request.apiDemoApi1 = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/demo/api_1', context, data, event, callbacks);
+    // DEMO API
+    Request.apiDemoApi = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/demo/my_api', context, data, event, callbacks);
     };
     
 
@@ -115,6 +115,8 @@
     Request.apiManagerMineSettingGoogleAuthRemove = function (context, data, event, callbacks) {
         Base.doPost('/api/manage/mine/setting/google_auth/remove', context, data, event, callbacks);
     };
+
+
 
     window.controller.Request = Request;
 

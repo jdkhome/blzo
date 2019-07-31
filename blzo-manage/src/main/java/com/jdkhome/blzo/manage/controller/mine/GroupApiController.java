@@ -4,6 +4,7 @@ import com.jdkhome.blzo.ex.authj.core.Authj;
 import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.generator.model.Group;
 import com.jdkhome.blzo.ex.authj.pojo.dto.AuthDTO;
+import com.jdkhome.blzo.ex.authj.pojo.dto.LayerDTO;
 import com.jdkhome.blzo.ex.authj.service.GroupBasicService;
 import com.jdkhome.blzo.ex.authj.service.GroupService;
 import com.jdkhome.blzo.ex.authj.validator.OrganizeValidator;
@@ -17,6 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 /**
