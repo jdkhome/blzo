@@ -12,7 +12,7 @@ spring:
     manage:
       url: jdbc:mysql://data-public.jdkhome.com:3306/blzo?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: blzo
-      password: testpwd
+      password: 123456
 
   redis:
     host: host

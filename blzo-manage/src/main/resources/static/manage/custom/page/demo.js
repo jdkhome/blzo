@@ -10,11 +10,11 @@
         init: function () {
             var _this = this;
 
-            $('#demo-api-1').click(function (event) {
-                request.apiDemoApi1($(document), {}, 'demo-api-1-callback');
+            $('#demo-api').click(function (event) {
+                request.apiDemoApi($(document), {}, 'demo-api-callback');
             });
 
-            $(document).on('demo-api-1-callback', function (msg, data) {
+            $(document).on('demo-api-callback', function (msg, data) {
                 if (data.code != 200) {
                     new NotificationFx({
                         message: data.msg

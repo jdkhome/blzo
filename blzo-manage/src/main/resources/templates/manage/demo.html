@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="manage/common/head"></head>
-
 <body>
-
 <section id="container">
     <!--头部-->
     <header th:replace="manage/common/header"></header>
-
     <!-- 菜单栏 -->
     <aside th:replace="manage/common/aside"></aside>
-
     <!--主要内容 -->
     <section id="main-content">
         <section class="wrapper">
@@ -20,36 +16,29 @@
                     <section class="panel">
                         <header th:replace="manage/common/box-header"></header>
                         <div class="panel-body">
-
-                    <div class="content-box-large box-with-header">
-                        <p>BLZO V1.2.0</p>
-                        <p>这是DEMO 页面</p>
-                        <button class="btn btn-info" id="demo-api-1">
-                            demo接口1
-                        </button>
-                    </div>
+                            <div class="content-box-large box-with-header">
+                                <p>这是DEMO 页面</p>
+                                <button class="btn btn-info" id="demo-api">
+                                    demo接口
+                                </button>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>
             <!-- page end-->
         </section>
     </section>
-
     <!--右侧边栏 -->
     <div th:replace="manage/common/right-sidebar"></div>
-
 </section>
-
 <!-- external javascript -->
 <div th:replace="manage/common/script"></div>
 <script type="text/javascript" src="/manage/custom/page/demo.js"></script>
 <script>
     window.onload = function () {
-
         var demo = new window.controller.Demo();
-
         demo.init();
-
     };
 </script>
 </body>

@@ -33,7 +33,7 @@ spring:
 
 
   profiles:
-    active: develop # 默认使用develop的配置
+    active: dev # 默认使用develop的配置
 
 
   # mvc
@@ -74,10 +74,11 @@ mybatis:
 logging:
   file: /tmp/logs/blzo-manage.log
 
-
 blzo:
   project_name: BLZO
   authj:
     controller-package_name: com.jdkhome.blzo.manage.controller
+
+
 
 

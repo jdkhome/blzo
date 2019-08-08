@@ -101,7 +101,11 @@
                                             <span class="admin-status-span" th:text="${obj.statusStr}"></span>
                                         </td>
                                         <td th:text="${obj.remark}"></td>
-                                        <td th:text="${'['+#dates.format(obj.lastTime, 'yyyy-MM-dd HH:mm:ss')+']'+obj.ipCity+'('+obj.lastIp+')'}"></td>
+                                        <td>
+                                         <span class="admin-status-span" th:text="${#dates.format(obj.lastTime, 'yyyy-MM-dd HH:mm:ss')}"></span><br>
+                                         <span class="admin-status-span" th:text="${obj.ipCity}"></span><br>
+                                         <span class="admin-status-span" th:text="${obj.lastIp}"></span>
+                                        </td>
                                         <td>
                                             <a href="#edit-admin" data-toggle="modal"
                                                class="btn btn-xs btn-primary edit-admin-btn">

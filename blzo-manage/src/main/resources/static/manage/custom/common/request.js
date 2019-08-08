@@ -10,9 +10,9 @@
     function Request() {
     }
 
-    // DEMO API 1
-    Request.apiDemoApi1 = function (context, data, event, callbacks) {
-        Base.doPost('/api/manage/demo/api_1', context, data, event, callbacks);
+    // DEMO API
+    Request.apiDemoApi = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/demo/my_api', context, data, event, callbacks);
     };
     
 
@@ -104,6 +104,16 @@
     // 修改密码
     Request.apiManagerMineSettingPassword = function (context, data, event, callbacks) {
         Base.doPost('/api/manage/mine/setting/password', context, data, event, callbacks);
+    };
+
+    // 设置google身份验证器
+    Request.apiManagerMineSettingGoogleAuth = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/mine/setting/google_auth', context, data, event, callbacks);
+    };
+
+    // 移除google身份验证器
+    Request.apiManagerMineSettingGoogleAuthRemove = function (context, data, event, callbacks) {
+        Base.doPost('/api/manage/mine/setting/google_auth/remove', context, data, event, callbacks);
     };
 
 

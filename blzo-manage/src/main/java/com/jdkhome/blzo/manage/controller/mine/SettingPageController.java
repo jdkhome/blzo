@@ -4,7 +4,10 @@ import com.jdkhome.blzo.ex.authj.core.Authj;
 import com.jdkhome.blzo.ex.authj.core.AuthjManager;
 import com.jdkhome.blzo.ex.authj.generator.model.Admin;
 import com.jdkhome.blzo.ex.authj.service.AdminBasicService;
+import com.jdkhome.blzo.ex.google_auth.GoogleAuth;
+import com.jdkhome.blzo.ex.google_auth.pojo.GoogleAuthBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,9 @@ public class SettingPageController {
 
     @Autowired
     AdminBasicService adminBasicService;
+
+    @Value("${blzo.project_name}")
+    String projectName;
 
     /**
      * 个人信息设置
@@ -45,6 +51,19 @@ public class SettingPageController {
     public String password(Model model) {
 
         return "manage/page/mine/setting/password";
+    }
+
+    /**
+     * 设置google身份验证器
+     */
+    @RequestMapping("/google_auth")
+    @Authj(value = "设置google身份验证器", common = true)
+    public String googleAuth(Model model) {
+
+        GoogleAuthBean googleAuthBean = GoogleAuth.generator(projectName + authjManager.getUserId());
+
+        model.addAttribute("googleAuthBean", googleAuthBean);
+        return "manage/page/mine/setting/google_auth";
     }
 
 }
