@@ -1,28 +1,29 @@
-package com.jdkhome.blzo.core;
+package com.jdkhome.blzo;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
-@EnableScheduling
-@ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"}) // 扫描所有
+@MapperScan({"com.jdkhome.blzo.generator.dao"})
+@ComponentScan(basePackages = {"com.jdkhome.blzo.ex", "com.jdkhome.blzo"}) // 当你修改了项目包名, 记得修改这里
 @SpringBootApplication
-public class CoreApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
     /**
      * Springboot应用程序入口
      */
     public static void main(String[] args) {
-        SpringApplication.run(CoreApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
     public void run(String... args) {
-        log.info("Spring初始化over.");
+        // 这里可以放你希望程序启动后自动执行的方法
+        log.info("spring init over.");
     }
 }

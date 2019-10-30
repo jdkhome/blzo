@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.1.6.RELEASE'
-        blzoExVersion = '0.3.0.1.RELEASE'
+        blzoExVersion = '0.3.1.1.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -29,9 +29,6 @@ repositories {
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
-        maven {
-            url "https://repo.spring.io/libs-milestone"
-        }
         mavenCentral()
     }
 }
@@ -48,54 +45,13 @@ bootJar {
 //通过{exclude group:xxx} 可以从starter起步依赖中排除某个依赖库，从而达到瘦身的目的
 dependencies {
 
-    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-utils
-    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-utils', version: blzoExVersion
-
     // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
     compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: blzoExVersion
 
-    // aop
-    compile('org.springframework.boot:spring-boot-starter-aop')
-    //热部署发发发
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
-    //compile('org.springframework.boot:spring-boot-devtools')dd
-    compile('org.springframework.boot:spring-boot-starter-web')
 
-
-    // https://mvnrepository.com/artifact/com.alibaba/druid
-    compile('com.alibaba:druid:1.1.10')
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
-    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.1'
-    //pageHelper
-    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.12'
-
-    // redis
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
-
-
-
-    //==== apache common
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
-    // https://mvnrepository.com/artifact/commons-codec/commons-codec
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
     // 自动get set
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor("org.projectlombok:lombok:1.18.2")
-    compile ("org.projectlombok:lombok:1.18.2")
+    compileOnly("org.projectlombok:lombok:1.18.2")
 
-    // json
-    // https://mvnrepository.com/artifact/com.alibaba/fastjson
-    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.56'
-
-    // http client
-    compile 'com.github.kevinsawicki:http-request:6.0'
-    compile 'org.apache.httpcomponents:httpclient'
-
-
-    // 测试依赖
-    // https://mvnrepository.com/artifact/org.mockito/mockito-all
-    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
-    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

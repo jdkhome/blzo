@@ -1,4 +1,4 @@
-package com.jdkhome.blzo.core.configuration;
+package com.jdkhome.blzo.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
