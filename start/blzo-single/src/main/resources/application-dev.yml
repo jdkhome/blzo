@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.233:6603/test_seata?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: test_seata
+    password: test_seata
+
+  redis:
+    host: host
+    port: 6379
+    password: pwd
+    database: 0
+
+logging:
+  level:
+    root: info
