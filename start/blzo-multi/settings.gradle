@@ -7,9 +7,9 @@
  * in the user guide at https://docs.gradle.org/4.7/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'blzo'
+rootProject.name = 'blzo-multi'
 
 // 核心api模块
-include 'blzo-core'
-include 'blzo-manage'
-include 'blzo-common'
+include 'app-core'
+include 'app-manage'
+include 'mod-common'

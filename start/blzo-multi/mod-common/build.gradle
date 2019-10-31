@@ -1,0 +1,14 @@
+jar {
+    baseName = "mod-common"
+}
+dependencies {
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-ip2region
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-ip2region', version: blzoExVersion
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-utils
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-utils', version: blzoExVersion
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: blzoExVersion
+
+}
