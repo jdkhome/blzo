@@ -18,7 +18,7 @@ blzo-microservice-consul 是以consul作为注册中心的脚手架具体实现�
 
 ## 快速开始
 
-1. 准备 Mysql Redis Consul [Seata](https://www.jdkhome.com/dev-ops/deploy/seata.html) 服务
+1. 准备 [Mysql](https://www.jdkhome.com/dev-ops/deploy/database.html#mysql) [Redis](https://www.jdkhome.com/dev-ops/deploy/database.html#redis) [Consul](https://www.jdkhome.com/dev-ops/deploy/other.html#consul) [Seata](https://www.jdkhome.com/dev-ops/deploy/seata.html) 服务
 1. 创建 [管理后台基础数据库](./doc/manage.md) [user模块和friend模块数据库](doc/miroservice.md) 
 2. 修改服务链接配置，启动项目自由探索！
 
