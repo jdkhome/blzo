@@ -1,0 +1,152 @@
+<div class="row-fluid" th:fragment="paginate" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="col-lg-6">
+        <div class="dataTables_info" id="hidden-table-info_info">
+            显示 <span th:text="${pageInfo.startRow}"></span> to <span th:text="${pageInfo.endRow}"></span> 共 <span
+                th:text="${pageInfo.total}"></span> 条
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="dataTables_paginate paging_bootstrap pagination">
+            <ul>
+                <li id="prev" class="prev " th:classappend="${pageInfo.isFirstPage}?'disabled'"><a
+                        href="javascript:void(0);">← 上一页</a></li>
+
+                <li class="page" th:classappend="${pageInfo.pageNum==page}?'active'"
+                    th:each="page:${pageInfo.navigatepageNums}"><a href="javascript:void(0);" th:text="${page}">5</a>
+                </li>
+
+                <li id="next" class="next" th:classappend="${pageInfo.isLastPage}?'disabled'"><a
+                        href="javascript:void(0);">下一页 → </a></li>
+                <li>
+                    <a><input type="text" class="pageNo" style="width: 30px;height: 17px;text-align: center;"
+                              onkeyup="this.value=this.value.replace(/\D/g,'')"
+                              onafterpaste="this.value=this.value.replace(/\D/g,'')"/></a>
+                </li>
+                <li>
+                    <input type="hidden" class="size" th:value="${pageInfo.pageSize}"/>
+                    <input type="hidden" class="pages" th:value="${pageInfo.pages}"/>
+                    <a id="go" style="cursor: pointer;">Go</a>
+                </li>
+                <script>
+                    var path = "?";
+
+                    //                    var paramDict = {};
+
+                    (function ($) {
+                        var paramDict = {};
+
+                        var totalPages = $('.pages').val();
+
+                        // 获取当前URL中的参数
+                        if (window.location.search.startsWith("?")) {
+                            // 有参数
+                            var params = window.location.search.substring(1).split("&");
+                            for (var i in params) {
+                                if (params[i].length != 0) {
+                                    var key = params[i].split("=")[0];
+                                    var value = params[i].split("=")[1];
+                                    paramDict[key] = value;
+                                }
+                            }
+                        } else {
+                            // 无参数
+                        }
+
+                        // 先补充其他参数
+                        for (var key in paramDict) {
+                            if ((key == "page") || (key == "size")) {
+                                continue;
+                            }
+                            if (key != undefined) {
+                                path += key + "=" + paramDict[key] + "&";
+                            }
+                        }
+
+                        // 如果是第一页或者没有页码，上一页不可用
+                        if ((paramDict['page'] == undefined) || (paramDict['page'] == 1)) {
+//                            alert("上一页不可用");
+                            $('#prev').addClass('active');
+                            $('#prev a').attr('href', 'javascript:void(0)');
+                        } else {
+//                            alert("上一页可用");
+                            // 最后补充page和size
+                            var href = path + "page=" + (parseInt(paramDict['page']) - 1) + "&";
+
+                            if (paramDict['size'] == undefined) {
+                                href += "size=20";
+                            } else {
+                                href += "size=" + paramDict['size'];
+                            }
+
+                            // 上一页按钮
+                            // $('#prev').addClass('active');
+                            $('#prev a').attr('href', href);
+//                            console.log(href);
+                        }
+
+                        // 如果共有1页，下一页不可用
+                        // 如果共有>1页，当前页是最后一页，下一页不可用
+                        if ((totalPages <= 1) || ((paramDict['page'] == totalPages) && (totalPages > 1))) {
+//                            alert("下一页不可用");
+                            $('#next').addClass('active');
+                            $('#next a').attr('href', 'javascript:void(0)');
+                        } else {
+//                            alert("下一页可用");
+                            var href = path;
+
+                            // 最后补充page和size
+                            if (paramDict['page'] == undefined) {
+                                href += "page=2&";
+                            } else {
+                                href += "page=" + (parseInt(paramDict['page']) + 1) + "&";
+                            }
+
+                            if (paramDict['size'] == undefined) {
+                                href += "size=20";
+                            } else {
+                                href += "size=" + paramDict['size'];
+                            }
+
+                            // 下一页按钮
+                            // $('#next').addClass('active');
+                            $('#next a').attr('href', href);
+//                            console.log(href);
+                        }
+
+                        $('.page a').on('click', function () {
+
+                            var pageInput = this.text;
+
+                            if ((pageInput.length == 0) || (parseInt(pageInput) > parseInt($(".pages").val())) || (parseInt(pageInput) < 1)) {
+                                return;
+                            }
+
+                            path += "page=" + pageInput + "&";
+                            path += "size=20";
+
+//                            console.log(href);
+                            location.href = path;
+                        });
+
+                        // go按钮
+                        $('#go').on('click', function () {
+
+                            var pageInput = $('.pageNo').val();
+
+                            if ((pageInput.length == 0) || (parseInt(pageInput) > parseInt($(".pages").val())) || (parseInt(pageInput) < 1)) {
+                                return;
+                            }
+
+                            path += "page=" + pageInput + "&";
+                            path += "size=20";
+
+//                            console.log(href);
+                            location.href = path;
+                        });
+                    })
+                    (jQuery);
+                </script>
+            </ul>
+        </div>
+    </div>
+</div>

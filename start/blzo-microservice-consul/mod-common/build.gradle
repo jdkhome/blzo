@@ -1,0 +1,23 @@
+jar {
+    baseName = "mod-common"
+}
+dependencies {
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-ip2region
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-ip2region', version: blzoExVersion
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-utils
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-utils', version: blzoExVersion
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: blzoExVersion
+
+    compile project(":blzo-ex-consul")
+
+    // https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-seata
+    compile("com.alibaba.cloud:spring-cloud-alibaba-seata:2.1.0.RELEASE") {
+        exclude group: 'io.seata', module: 'seata-all'
+    }
+    // https://mvnrepository.com/artifact/io.seata/seata-all
+    compile group: 'io.seata', name: 'seata-all', version: '0.9.0'
+
+}

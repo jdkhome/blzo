@@ -1,0 +1,14 @@
+jar {
+    baseName = "app-manage"
+}
+dependencies {
+    // 公共依赖
+    compile project(":mod-common")
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-authj
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-authj', version: blzoExVersion
+
+    // thymeleaf
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+}

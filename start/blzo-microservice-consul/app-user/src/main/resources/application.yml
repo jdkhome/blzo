@@ -1,0 +1,52 @@
+# 内置tomcat端口
+
+spring:
+  application:
+    name: app-user
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    alibaba:
+        seata:
+          tx-service-group: blzo_tx
+    consul:
+      discovery:
+        # 节点名称 应用名-环境-xxxxxxxx
+        instanceId: ${spring.application.name}:${spring.profiles.active}:${vcap.application.instance_id:${spring.application.instance_id:${spring.cloud.consul.discovery.hostname}}}
+
+  profiles:
+    active: dev # 默认使用develop的配置
+
+
+# Mybatis配置（可以不使用mybatis-config.xml）
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: io.seata.sample.entity
+#  configuration:
+#    mapUnderscoreToCamelCase: true
+#    useColumnLabel: true
+
+# logback配置
+logging:
+  file: /tmp/logs/app-user.log
+
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+feign:
+  httpclient:
+    connection-timeout: 60000
+
+

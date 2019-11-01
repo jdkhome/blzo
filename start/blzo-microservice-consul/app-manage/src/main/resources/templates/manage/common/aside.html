@@ -1,0 +1,41 @@
+<aside th:fragment="aside" xmlns:th="http://www.thymeleaf.org">
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a href="/manage/index">
+                        <i class="fa fa-dashboard"></i>
+                        <span>仪表盘</span>
+                    </a>
+                </li>
+                <li class="submenu" th:each="menuVO:${layerList}">
+                    <a href="javascript:;">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span th:text="${menuVO.name}">组名</span>
+                    </a>
+                    <!-- Sub menu -->
+                    <ul class="sub">
+                        <li th:each="authjBean:${menuVO.menus}">
+                            <a th:href="${authjBean.uri}" th:text="${authjBean.name}">管理员列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="submenu" th:if="${moreMenu!=null}">
+                    <a href="javascript:;">
+                        <i class="glyphicon glyphicon-list"></i>
+                        <span>未分组</span>
+                    </a>
+                    <!-- Sub menu -->
+                    <ul class="sub">
+                        <li th:each="authjBean:${moreMenu.menus}">
+                            <a th:href="${authjBean.uri}" th:text="${authjBean.name}">管理员列表</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
