@@ -10,11 +10,9 @@
 rootProject.name = 'blzo-microservice-consul'
 
 // 核心api模块
-//include 'app-user'
-include 'app-manage'
 include 'mod-common'
 
-include 'blzo-ex-consul'
+include 'app-manage'
 include 'app-user'
 include 'app-friend'
 

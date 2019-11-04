@@ -11,7 +11,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
     compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: blzoExVersion
 
-    compile project(":blzo-ex-consul")
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-consul
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-consul', version: blzoExVersion
 
     // https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-seata
     compile("com.alibaba.cloud:spring-cloud-alibaba-seata:2.1.0.RELEASE") {
