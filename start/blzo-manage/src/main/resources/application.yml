@@ -1,0 +1,45 @@
+# 内置tomcat端口
+
+spring:
+  profiles:
+    active: dev # 默认使用develop的配置
+  # mvc
+  # Path pattern used for static resources.
+  mvc:
+    static-path-pattern: /**
+
+  # resource
+  # 是否开启默认的资源处理，默认为true
+  resources:
+    add-mappings: true
+    chain:
+      cache: true # 是否开启缓存，默认为: true
+      strategy:
+        content:
+          enabled: true # 是否开启内容版本策略，默认为false
+    # 指定静态资源路径，默认为classpath:[/META-INF/resources/,/resources/, /static/, /public/]以及context:/
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
+  thymeleaf: #thymeleaf
+    enabled: true
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template: true
+    check-template-location: true
+
+# logback配置
+logging:
+  file: /tmp/logs/blzo-manage.log
+
+blzo:
+  # 管理后台显示项目名
+  project_name: BLZO
+  authj:
+    # 管理后台Controller层包名 用于权限扫描
+    controller-package_name: com.jdkhome.blzo.manage.controller
+
+
+
+

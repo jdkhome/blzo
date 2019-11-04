@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+                                <style>
+                                    .btn-body {
+                                        margin: 1px;
+                                    }
+                                </style>
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-dark-navy-blue ">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#extends">继承的菜单</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#all">所有菜单</a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <div id="extends" class="tab-pane active">
+                                                <div th:each="menuGroup:${menuGroups}">
+                                                    <h6 th:text="${'继承自: '+menuGroup.name}">组名</h6>
+                                                    <div>
+                                                        <button th:each="menu:${menuGroup.menus}"
+                                                                onclick="addMenu(this)"
+                                                                class="btn btn-primary add-menu btn-body"
+                                                                th:attr="value=${menu.uri}" th:text="${menu.name}">
+                                                            管理员列表页
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div id="all" class="tab-pane">
+                                                <button th:each="menu:${allMenu}"
+                                                        onclick="addMenu(this)"
+                                                        class="btn btn-primary add-menu btn-body"
+                                                        th:attr="value=${menu.uri}" th:text="${menu.name}">
+                                                    管理员列表页
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            <div class="col-md-12">
+                                <legend></legend>
+                                <p>选择一个菜单组来添加菜单</p>
+                            </div>
+
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th width="20%">菜单组</th>
+                                        <th width="60%">内容</th>
+                                        <th width="20%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="my-layer-table">
+                                    <tr ondrop="drop(event,this)" ondragover="allowDrop(event)"
+                                        draggable="true" ondragstart="drag(event, this)"
+                                        th:each="layer:${layerList}">
+                                        <td>
+                                            <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <span class="onoffswitch">
+                                                            <input type="radio" name="select-layer">
+                                                        </span>
+                                                    </span>
+                                                <input class="form-control layer-name" th:value="${layer.name}"
+                                                       type="text">
+                                            </div>
+                                        </td>
+                                        <td class="layer-menus">
+                                            <button class="btn btn-danger remove-menu btn-body"
+                                                    ondrop="drop(event,this)" ondragover="allowDrop(event)"
+                                                    draggable="true" ondragstart="drag(event, this)"
+                                                    th:each="menu:${layer.menus}" th:attr="value=${menu.uri}"
+                                                    th:text="${menu.name}"
+                                                    onclick="removeMenu(this)">
+                                                管理员列表页
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger remove-layer" onclick="removeLayer(this)">
+                                                移除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-info btn-sm" id="add-layer">新增</button>
+                                <button class="btn btn-success btn-sm" id="layer-save">保存</button>
+                                <button class="btn btn-warning btn-sm" id="layer-init">初始化</button>
+
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+<script type="text/javascript" src="/manage/custom/page/mine/layer/modify.js"></script>
+<script>
+
+    function addMenu(_this) {
+        $("input[name='select-layer']:checked").parents('tr').find('.layer-menus:first')
+            .append(`
+                        <button class="btn btn-danger btn-xs remove-menu btn-body"
+                        ondrop="drop(event,this)" ondragover="allowDrop(event)"
+                        draggable="true" ondragstart="drag(event, this)"
+                        onclick="removeMenu(this)" value="${$(_this).attr('value')}" >
+                        ${$(_this).text()}
+                        </button>
+                    `);
+    }
+
+    function removeMenu(_this) {
+        $(_this).remove();
+    }
+
+
+    function removeLayer(_this) {
+        $(_this).parent().parent().remove();
+    }
+
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    var srcdiv = null;
+
+    function drag(ev, divdom) {
+        srcdiv = divdom;
+        ev.dataTransfer.setData("text/html", divdom.innerHTML);
+        event.stopPropagation();
+        console.log(divdom);
+    }
+
+    function drop(ev, divdom) {
+        ev.preventDefault();
+        if (srcdiv != divdom && srcdiv.tagName == divdom.tagName) {
+            srcdiv.innerHTML = divdom.innerHTML;
+            divdom.innerHTML = ev.dataTransfer.getData("text/html");
+        }
+    }
+
+    window.onload = function () {
+
+        var modify = new window.controller.Modify();
+
+        modify.init();
+
+    };
+</script>
+</body>
+</html>

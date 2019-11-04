@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+
+                            <div class="form-group col-md-3">
+                                <label>组织ID</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="organizeId" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>名称</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="name" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>状态</label>
+                                <select id="status" name="search" class="form-control">
+                                    <option value="">所有</option>
+                                    <option th:each="status:${statusEnums}"
+                                            th:text="${status.name}" th:value="${status.code}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>备注</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="remark" name="search">
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <legend></legend>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-success" id="list-search">
+                                            <i class="glyphicon glyphicon-search"></i>筛选
+                                        </button>
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <a href="#new-organize" data-toggle="modal" class="btn btn-primary">
+                                            添加<i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <table class="table table-hover general-table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>名称</th>
+                                        <th>状态</th>
+                                        <th>备注</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="obj,objStatus : ${pageInfo.list}">
+                                        <td th:text="${obj.id}"></td>
+                                        <td th:text="${obj.name}"></td>
+                                        <td th:attr="status=${obj.status}">
+                                            <span th:each="status:${statusEnums}"
+                                                  th:text="${status.name}"
+                                                  th:if="${status.code==obj.status}"></span>
+
+                                        </td>
+                                        <td th:text="${obj.remark}"></td>
+                                        <td th:text="${#dates.format(obj.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                        <td>
+                                            <a href="#edit-organize" data-toggle="modal"
+                                               class="btn btn-round btn-primary edit-organize-btn">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a data-toggle="modal"
+                                               class="btn btn-round btn-danger del-organize-btn">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div th:replace="manage/common/paginate"></div>
+                            </div>
+
+                            <!-- 编辑面板 -->
+                            <div aria-hidden="true" aria-labelledby="edit-organize-label"
+                                 role="dialog" tabindex="-1" id="edit-organize" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">编辑组织</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <input type="hidden" class="form-control" id="edit-id">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">组织名称</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="edit-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">状态</label>
+                                                    <div class="col-sm-6">
+                                                        <select id="edit-status" class="form-control">
+                                                            <option th:each="status:${statusEnums}"
+                                                                    th:text="${status.name}" th:value="${status.code}">
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">保存组织修改内容</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="organize-save"
+                                                           class="btn btn-success pull-right">保存</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 添加面板 -->
+                            <div aria-hidden="true" aria-labelledby="new-organize-label"
+                                 role="dialog" tabindex="-1" id="new-organize" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-hidden="true" data-dismiss="modal"
+                                                    class="close" type="button">×
+                                            </button>
+                                            <h4 class="modal-title">创建组织</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal bucket-form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">组织名称</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-name"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">备注</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control" id="add-remark"
+                                                               placeholder="请输入">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">将创建新的组织</label>
+                                                    <div class="col-sm-3">
+                                                        <a id="organize-add"
+                                                           class="btn btn-success pull-right">创建</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+
+<script type="text/javascript" src="/manage/custom/page/system/organize/list.js"></script>
+<script>
+    window.onload = function () {
+
+        var organizeList = new window.controller.OrganizeList();
+
+        organizeList.init();
+
+        var search = new window.controller.Search();
+
+        search.init();
+    };
+</script>
+</body>
+</html>

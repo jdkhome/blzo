@@ -1,0 +1,7 @@
+jar {
+    baseName = "app-friend"
+}
+dependencies {
+    // 公共依赖
+    compile project(":mod-common")
+}

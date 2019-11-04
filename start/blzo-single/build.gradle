@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.6.RELEASE'
+        blzoExVersion = '0.3.1.1.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: "java"
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
+
+sourceCompatibility = 1.10
+targetCompatibility = 1.10
+
+repositories {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        mavenCentral()
+    }
+}
+
+//这里一定得要。在多模块下，不然编译失败，因为不会把信赖模块给打包。
+jar {
+    enabled = true
+}
+
+bootJar {
+    baseName "blzo-single"
+}
+
+//通过{exclude group:xxx} 可以从starter起步依赖中排除某个依赖库，从而达到瘦身的目的
+dependencies {
+
+    // https://mvnrepository.com/artifact/com.jdkhome.blzo/blzo-ex-basic
+    compile group: 'com.jdkhome.blzo', name: 'blzo-ex-basic', version: blzoExVersion
+
+
+    // 自动get set
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    annotationProcessor("org.projectlombok:lombok:1.18.2")
+    compileOnly("org.projectlombok:lombok:1.18.2")
+
+}

@@ -1,0 +1,74 @@
+# 内置tomcat端口
+
+spring:
+  application:
+    name: app-manage
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: blzo_tx
+    consul:
+      discovery:
+        # 节点名称 应用名-环境-xxxxxxxx
+        instanceId: ${spring.application.name}:${spring.profiles.active}:${vcap.application.instance_id:${spring.application.instance_id:${spring.cloud.consul.discovery.hostname}}}
+  mvc:
+    static-path-pattern: /**
+
+  # resource
+  # 是否开启默认的资源处理，默认为true
+  resources:
+    add-mappings: true
+    chain:
+      cache: true # 是否开启缓存，默认为: true
+      strategy:
+        content:
+          enabled: true # 是否开启内容版本策略，默认为false
+    # 指定静态资源路径，默认为classpath:[/META-INF/resources/,/resources/, /static/, /public/]以及context:/
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
+  thymeleaf: #thymeleaf
+    enabled: true
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template: true
+    check-template-location: true
+
+mybatis:
+  typeAliasesPackage: io.seata.sample.entity
+
+# logback配置
+logging:
+  file: /tmp/logs/blzo-manage.log
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+feign:
+  httpclient:
+    connection-timeout: 60000
+
+blzo:
+  # 管理后台显示项目名
+  project_name: BLZO
+  authj:
+  # 管理后台Controller层包名 用于权限扫描
+    controller-package_name: com.jdkhome.blzo.manage.controller
+
+
+
+

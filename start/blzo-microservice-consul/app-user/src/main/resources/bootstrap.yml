@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: dev # 默认使用develop配置
+
+---
+
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      # consul地址
+      host: 192.168.1.244
+      port: 8500
+      enabled: true
+      discovery:
+        enabled: true
+        register: true
+        service-name: app-user-service
+        # 节点id 可以用环境变量在容器中设置
+        # instance-id: linkji@silknets
+        # hostname: ${server.host}
+        hostname: 192.168.12.18
+        port: ${server.port}
+        # 节点health地址 检查间隔
+        healthCheckPath: /api/health
+        healthCheckInterval: 15s
+        tags: dev
+      config:
+        enabled: true   # 默认是true --
+        format: YAML    # 表示consul上面文件的格式 有四种 YAML PROPERTIES KEY-VALUE FILES
+        prefix: config  # /config
+        defaultContext: application # /config(上面的)/application
+        data-key: test.yml    #表示consul上面的KEY值(或者说文件的名字) 默认是data /config(上面的)/application(上面的)/test.yml
+        watch:
+          enabled: true
+          delay: 1000
