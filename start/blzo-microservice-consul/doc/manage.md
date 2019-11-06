@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON blzo_manage.* TO blzo@'%';
 
 ### 管理后台建表
 
-> 执行后请手动把 admins 表中的超级管理员的id 改为 0
+> 执行后请手动把 admins 表中的超级管理员的id 改为 0 , organizes 表中总组织id 改为0
 
 username: root
 password: 1234abc
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_KEY` (`username`) USING BTREE,
   KEY `phone_KEY` (`phone`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of admins
@@ -179,7 +179,7 @@ CREATE TABLE `logs` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `admin_id_KEY` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9280 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for organizes
@@ -194,17 +194,13 @@ CREATE TABLE `organizes` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_KEY` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of organizes
 -- ----------------------------
 BEGIN;
 INSERT INTO `organizes` VALUES (0, 'root', 1, '总组织', '2019-03-07 10:31:58', '2019-03-11 09:25:02');
-INSERT INTO `organizes` VALUES (4, '测试1组', 1, 'ccc', '2019-03-12 09:35:57', '2019-03-12 09:35:57');
-INSERT INTO `organizes` VALUES (5, '供应商1', 1, 'adasdad', '2019-05-09 03:30:06', '2019-05-09 03:30:06');
-INSERT INTO `organizes` VALUES (6, 'aa', 1, 'aa', '2019-05-09 05:04:39', '2019-05-09 05:04:39');
-INSERT INTO `organizes` VALUES (7, 'hello', 1, 'hello', '2019-05-09 14:49:03', '2019-05-09 14:49:03');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
