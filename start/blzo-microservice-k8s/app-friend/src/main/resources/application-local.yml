@@ -1,0 +1,16 @@
+server:
+  port: 8001
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.233:6603/blzo_friend?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: blzo_friend
+    password: 123456
+
+logging:
+  level:
+    root: info
+
+feign:
+  app-friend: 192.168.12.186:31001
+  app-user: 192.168.12.186:31002

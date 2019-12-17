@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    environment {
+        HARBOR_CREDS = credentials('jenkins-harbor-creds')
+        K8S_CONFIG = credentials('jenkins-k8s-config')
+    }
+    parameters {
+        string(name: 'K8S_NAMESPACE', defaultValue: 'blzo-microservice-k8s', description: 'k8s的namespace名称')
+        string(name: 'REGISTRY_URL', defaultValue: 'xxxxxx', description: '仓库地址')
+        string(name: 'PROJECT_NAME', defaultValue: 'blzo-microservice-k8s', description: '项目名称')
+        string(name: 'APP_NAME', defaultValue: 'app-user', description: '应用名称')
+        string(name: 'SERVER_PORT', defaultValue: '8002', description: '服务端口号')
+        string(name: 'NODE_PORT', defaultValue: '31002', description: '开发环境nodeport')
+        string(name: 'CONFIG_ENV', defaultValue: 'dev', description: '配置文件环境')
+        // 开发环境部署 除了deployment 和 clusterip 之外 还需额外 起一个 nodeport 方便本地环境调用 , 部署测试环境时使用 deployment 即可
+        string(name: 'YAML_FILE', defaultValue: 'deployment-with-nodeport', description: 'YAML 文件名')
+    }
+    stages {
+        stage('Gradle Build') {
+            agent any
+            steps {
+                sh "${tool 'gradle5.5'}/bin/gradle ${params.APP_NAME}:bootJar"
+            }
+            // 也可以用下面的方式
+            // agent { docker 'gradle:5.4.1-jdk11' }
+            // steps {
+            //     sh "gradle ${params.APP_NAME}:bootJar"
+            // }
+        }
+        stage('Docker Build') {
+            agent any
+            steps {
+                sh "docker login -u ${HARBOR_CREDS_USR} -p ${HARBOR_CREDS_PSW} ${params.REGISTRY_URL}"
+                sh "docker build -t ${params.REGISTRY_URL}/${params.PROJECT_NAME}/${params.APP_NAME}:build.${env.BUILD_ID} ./${params.APP_NAME}"
+                sh "docker push ${params.REGISTRY_URL}/${params.PROJECT_NAME}/${params.APP_NAME}:build.${env.BUILD_ID}"
+            }
+        }
+        stage('K8S Deploy') {
+            agent { docker 'lwolf/helm-kubectl-docker' }
+            steps {
+                sh "mkdir -p ~/.kube"
+                sh "echo ${K8S_CONFIG} | base64 -d > ~/.kube/config"
+                sh "sed -e 's#{PROJECT_NAME}#${params.PROJECT_NAME}#g;s#{APP_NAME}#${params.APP_NAME}#g;s#{SERVER_PORT}#${params.SERVER_PORT}#g;s#{REGISTRY_URL}#${params.REGISTRY_URL}#g;s#{IMAGE_TAG}#build.${env.BUILD_ID}#g;s#{CONFIG_ENV}#${params.CONFIG_ENV}#g;s#{NODE_PORT}#${params.NODE_PORT}#g' k8s-yaml/${params.YAML_FILE}.tpl > deployment.yml"
+                sh "kubectl apply -f deployment.yml --namespace=${params.K8S_NAMESPACE}"
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+<div th:fragment="script" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!--Core js-->
+    <script src="/manage/js/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+    <script src="/manage/bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/manage/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/manage/js/jquery.scrollTo.min.js"></script>
+    <script src="/manage/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="/manage/js/jquery.nicescroll.js"></script>
+    <!--Easy Pie Chart-->
+    <script src="/manage/js/easypiechart/jquery.easypiechart.js"></script>
+    <!--Sparkline Chart-->
+    <script src="/manage/js/sparkline/jquery.sparkline.js"></script>
+    <!--jQuery Flot Chart-->
+    <script src="/manage/js/flot-chart/jquery.flot.js"></script>
+    <script src="/manage/js/flot-chart/jquery.flot.tooltip.min.js"></script>
+    <script src="/manage/js/flot-chart/jquery.flot.resize.js"></script>
+    <script src="/manage/js/flot-chart/jquery.flot.pie.resize.js"></script>
+
+
+    <!--common script init for all pages-->
+    <script src="/manage/js/scripts.js"></script>
+
+    <script src="/manage/alert/js/modernizr.custom.js"></script>
+    <script src="/manage/alert/js/classie.js"></script>
+    <script src="/manage/alert/js/notificationFx.js"></script>
+
+    <script type="text/javascript" src="/manage/custom/common/base.js"></script>
+    <script type="text/javascript" src="/manage/custom/common/request.js"></script>
+    <script type="text/javascript" src="/manage/custom/common/search.js"></script>
+
+
+    <!-- 时间选择器 -->
+    <link rel="stylesheet" type="text/css" href="/manage/js/bootstrap-datetimepicker/css/datetimepicker.css"/>
+    <script type="text/javascript" src="/manage/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+    <script>
+        $.fn.datetimepicker.dates['zh-cn'] = {
+            days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+            daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+            months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一", "十二"],
+            monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一", "十二"],
+            meridiem: ["上午", "下午"],
+            suffix: ["st", "nd", "rd", "th"],
+            today: "今天"
+        };
+
+        $(".date-picker").datetimepicker({
+            language: 'zh-cn',
+            format: 'yyyy-mm-dd',
+            todayBtn: true,
+            startView: 2,
+            minView: 2,
+            autoclose: true
+        });
+
+        $(".datetime-picker").datetimepicker({
+            language: 'zh-cn',
+            format: 'yyyy-mm-dd hh:ii:ss',
+            startView: 3,
+            minView: 0,
+            autoclose: true
+        });
+    </script>
+
+</div>

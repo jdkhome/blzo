@@ -22,7 +22,7 @@ spring:
         # 节点id 可以用环境变量在容器中设置
         # instance-id: linkji@silknets
         # hostname: ${server.host}
-        hostname: 192.168.12.18
+        hostname: 192.168.12.74
         port: ${server.port}
         # 节点health地址 检查间隔
         healthCheckPath: /api/health

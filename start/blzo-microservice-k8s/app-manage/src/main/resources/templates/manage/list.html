@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <legend>筛选条件<a class="empty"><i class="glyphicon glyphicon-repeat"></i></a></legend>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>登录名</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="userName" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>昵称</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="nickName" name="search">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>手机号</label>
+                                <input class="form-control" placeholder="请输入" type="text" id="phone" name="search">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>选择日期</label>
+                                <!-- class 加上 date-picker 即可 -->
+                                <input type="text" id="checkdate" name="search" readonly class="date-picker form-control">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>选择日期时间</label>
+                                <!-- class 加上 datetime-picker 即可 -->
+                                <input type="text" id="checkdatetime" name="search" readonly class="datetime-picker form-control">
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="btn btn-round btn-success" id="list-search">
+                                    <i class="glyphicon glyphicon-search"></i>搜索
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                <legend>内容<a class="btn btn-round btn-info" href="/manage/system/admin/add"><i
+                                        class="fa fa-plus"></i>添加</a>
+                                </legend>
+                            </div>
+                            <div class="col-md-12">
+                                <!--<div class="adv-table">-->
+                                <table class="table table-hover general-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>KHTML</td>
+                                        <td>Konqureror 3.5</td>
+                                        <td>KDE 3.5</td>
+                                        <td>3.5</td>
+                                        <td>A</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tasman</td>
+                                        <td>Internet Explorer 4.5</td>
+                                        <td>Mac OS 8-9</td>
+                                        <td>-</td>
+                                        <td>X</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <!--分页器 -->
+                                <!--<div th:replace="manage/common/paginate"></div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+
+<script>
+    window.onload = function () {
+
+        var search = new window.controller.Search();
+
+        search.init();
+    };
+</script>
+</body>
+</html>
