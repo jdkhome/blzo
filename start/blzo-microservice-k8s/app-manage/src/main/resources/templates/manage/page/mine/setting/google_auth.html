@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+                            <div id="wizard">
+                            <h2>下载</h2>
+                            <section>
+                                	<h2>使用动态密码，提高账户安全性！</h2>
+                                	<p>下载Google身份验证器，支持 Android/iOS</p>
+                                	<div class="clientslinks">
+                                		<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=zh_CN" rel="noreferrer noopener" target="_blank">
+                                			<img src="/common/google_play.png" alt="安卓应用" width="135px" height="40px">
+                                		</a>
+                                		<a href="https://apps.apple.com/cn/app/google-authenticator/id388497605" rel="noreferrer noopener" target="_blank">
+                                			<img src="/common/app_store.svg" alt="iOS 应用" width="135px" height="40px">
+                                		</a>
+                                	</div>
+                                	<p>在各个应用市场上搜"Google身份验证器"也可以。</p>
+                            </section>
+
+                            <h2>设置</h2>
+                            <section>
+                                <h2>打开Google身份验证器，扫描二维码</h2>
+                                <p>设置(新增) -> 扫描条形码</p>
+                                <img width="135px" height="135px" th:src="@{${'/manage/tools/qr/get'}(content=${googleAuthBean.qrCode})}" alt="使用Google身份验证器扫描" >
+                            </section>
+
+                            <h2>验证</h2>
+                            <section>
+                                <h2>输入动态密码，完成绑定</h2>
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">输入动态密码</label>
+                                        <div class="col-lg-8">
+                                            <input type="hidden" id="secret" th:value="${googleAuthBean.secret}">
+                                            <input type="text" id="code" class="form-control" placeholder="请输入动态密码">
+                                        </div>
+                                    </div>
+                                </form>
+                                <p>登陆时，请使用动态密码替代原密码。</p>
+                                <p>您可以随时更换/取消绑定Google身份验证器。</p>
+                            </section>
+                        </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+
+<script type="text/javascript" src="/manage/custom/page/mine/setting/google_auth.js"></script>
+<link rel="stylesheet" href="/manage/css/jquery.steps.css">
+<script src="/manage/js/jquery-steps/jquery.steps.js"></script>
+<script>
+    window.onload = function () {
+
+        var controller = new window.controller.GoogleAuth();
+
+        controller.init();
+    };
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="manage/common/head"></head>
+
+<body>
+
+<section id="container">
+    <!--头部-->
+    <header th:replace="manage/common/header"></header>
+
+    <!-- 菜单栏 -->
+    <aside th:replace="manage/common/aside"></aside>
+
+    <!--主要内容 -->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header th:replace="manage/common/box-header"></header>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <legend>组名:<span th:text="${group.name}"></span></legend>
+                            </div>
+                            <input type="hidden" id="groupId" th:value="${group.id}">
+
+                            <form class="form-horizontal">
+                                <div class="form-group last">
+                                    <style>
+                                        #ms-auth_multi_select {
+                                            width: 100%;
+                                        }
+                                    </style>
+                                    <div class="col-md-12">
+                                        <select name="country" class="multi-select" multiple="" id="auth_multi_select">
+                                            <option th:each="obj : ${groupAuthVOList}"
+                                                    th:if="${obj.authjBean!=null}"
+                                                    th:selected="${obj.have}"
+                                                    th:value="${obj.uri}">
+                                                <span th:if="${obj.authjBean.getMenu()}">[菜单]</span>
+                                                <span th:text="${obj.authjBean.name}"></span>
+                                                (<span th:text="${obj.authjBean.uri}"></span>)
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="col-md-12">
+                                <legend></legend>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <!--<button class="btn btn-sm btn-success" id="list-search">-->
+                                        <!--<i class="glyphicon glyphicon-search"></i>筛选-->
+                                        <!--</button>-->
+                                    </div>
+                                    <div class="btn-group pull-right">
+                                        <a id="save"
+                                           class="btn btn-success">保存</a></legend>
+
+                                        <!--<a class="btn btn-primary btn-sm" href="/manage/system/admin/add"> 添加管理员<i-->
+                                        <!--class="fa fa-plus"></i></a>-->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--<div class="col-md-12">
+                                <table class="table table-striped" id="os-table">
+                                    <thead>
+                                    <tr>
+                                        <th>URI</th>
+                                        <th>权限名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="obj : ${groupAuthVOList}">
+                                        <td th:text="${obj.uri}"></td>
+                                        <td>
+                                            <span th:if="${obj.authjBean!=null && obj.authjBean.getMenu()}">[菜单]</span>
+                                            <span th:text="${obj.authjBean==null?'已失效':obj.authjBean.name}"></span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info add" th:if="${not obj.have}"
+                                               th:attr="data-uri=${obj.uri}">
+                                                添加
+                                            </a>
+                                            <a class="btn btn-danger remove" th:if="${obj.have}"
+                                               th:attr="data-uri=${obj.uri}">
+                                                <i class="glyphicon glyphicon-remove"></i>
+                                                移除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>-->
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+
+    <!--右侧边栏 -->
+    <div th:replace="manage/common/right-sidebar"></div>
+
+</section>
+
+<!-- external javascript -->
+<div th:replace="manage/common/script"></div>
+<link rel="stylesheet" type="text/css" href="/manage/js/jquery-multi-select/css/multi-select.css"/>
+<script type="text/javascript" src="/manage/js/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/manage/js/jquery-multi-select/js/jquery.quicksearch.js"></script>
+
+<script type="text/javascript" src="/manage/custom/page/mine/group/auth.js"></script>
+<script>
+    window.onload = function () {
+
+        var groupAuth = new window.controller.GroupAuth();
+
+        groupAuth.init();
+
+    };
+</script>
+
+</body>
+</html>
